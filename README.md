@@ -1,4 +1,5 @@
-# Proyek Aplikasi Parkir Assistant Untuk Tumah Sakit Ibnu Sina Gresik
+#Super Admin
 
-## Deskripsi
-Aplikasi parkir berbasis android
+Branch ini digunakan untuk membuat dan modifikasi halaman website super admin a.k.a dashboard
+
+jangan lakukan merge, biarkan terpisah dari master.
