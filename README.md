@@ -1,5 +1,5 @@
-# Super Admin
 
-Branch ini digunakan untuk membuat dan modifikasi halaman website super admin a.k.a dashboard
+# Proyek Aplikasi Parkir Assistant
 
-jangan lakukan merge, biarkan terpisah dari master.
+## Deskripsi
+Aplikasi parkir berbasis android java untuk client user & CodeIgniter php untuk client admin
