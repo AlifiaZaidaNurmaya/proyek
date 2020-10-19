@@ -1,4 +1,4 @@
-# Proyek Aplikasi Parkir Assistant Untuk Tumah Sakit Ibnu Sina Gresik
+# Proyek Aplikasi Parkir Assistant
 
 ## Deskripsi
-Aplikasi parkir berbasis android
+Aplikasi parkir berbasis android java untuk client user & CodeIgniter php untuk client admin
