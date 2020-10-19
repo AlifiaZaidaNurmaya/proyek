@@ -3,19 +3,19 @@
 
     <item>
         <shape>
-            <solid android:color="#33B3B3B3" />
-            <corners android:radius="5dp" />
+            <solid android:color="#1A656565" />
+            <corners android:radius="10dp" />
             <padding
-                android:bottom="2dp"
-                android:left="0dp"
                 android:right="2dp"
-                android:top="0dp" />
+                android:left="0dp"
+                android:top="0dp"
+                android:bottom="2dp"/>
         </shape>
     </item>
     <item>
         <shape>
-            <solid android:color="@android:color/white" />
-            <corners android:radius="5dp" />
+            <solid android:color="@color/colorPrimaryDark" />
+            <corners android:radius="10dp" />
             <padding
                 android:bottom="0dp"
                 android:left="0dp"
@@ -23,6 +23,5 @@
                 android:top="0dp" />
         </shape>
     </item>
-
 
 </layer-list>
