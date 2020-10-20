@@ -1,4 +1,4 @@
-package org.aplas.parkirassistant;
+package org.proyek.parkirassistant;
 
 import androidx.appcompat.app.AppCompatActivity;
 
