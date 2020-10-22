@@ -33,6 +33,7 @@
     <div class="navbar-nav">
       <a class="nav-item nav-link" href="<?= base_url(); ?>user">Data Pelanggan</a>
       <a class="nav-item nav-link" href="<?= base_url(); ?>petugas">Data Petugas</a>
+      <a class="nav-item nav-link" href="<?= base_url(); ?>superadmin">Data Pegawai Super Admin</a>
       <!-- <a class="nav-item nav-link disabled" href="#">Disabled</a> -->
       </div>
     </div>
