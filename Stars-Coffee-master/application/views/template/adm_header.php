@@ -69,7 +69,7 @@ if ('admin' != ($this->session->userdata('level'))) {
             <aside class="main-sidebar sidebar-dark-primary elevation-4">
                 <!-- Brand Logo -->
                 <a href="index3.html" class="brand-link">
-                    <span class="brand-text font-weight-light">Stars Coffee</span>
+                    <span class="brand-text font-weight-light">Admin</span>
                 </a>
 
                 <!-- Sidebar -->
@@ -91,16 +91,15 @@ if ('admin' != ($this->session->userdata('level'))) {
                             <li class="nav-item">
                                 <a href="<?= base_url(); ?>admin/home" class="nav-link">
                                     <i class="nav-icon fas fa-columns"></i>
-                                    <p>
-                                        Dashboard
+                                    <p>Tabel Pelanggan
                                     </p>
                                 </a>
                             </li>
                             <li class="nav-item">
                                 <a href="<?= base_url(); ?>admin/produk" class="nav-link">
-                                    <i class="nav-icon fas fa-coffee"></i>
+                                    <i class="nav-icon fas fa-columns"></i>
                                     <p>
-                                        Produk
+                                        Tabel Petugas
                                     </p>
                                 </a>
                             </li>
@@ -108,15 +107,15 @@ if ('admin' != ($this->session->userdata('level'))) {
                                 <a href="<?= base_url(); ?>admin/user" class="nav-link">
                                     <i class="nav-icon fas fa-users"></i>
                                     <p>
-                                        User
+                                        Tabel Super Admin
                                     </p>
                                 </a>
                             </li>
                             <li class="nav-item">
                                 <a href="<?= base_url(); ?>admin/kategori" class="nav-link">
-                                    <i class="nav-icon fas fa-th"></i>
+                                    <i class="nav-icon fas fa-columns"></i>
                                     <p>
-                                        Kategori
+                                        Tabel Entry
                                     </p>
                                 </a>
                             </li>
@@ -124,7 +123,7 @@ if ('admin' != ($this->session->userdata('level'))) {
                                 <a href="#" class="nav-link">
                                     <i class="nav-icon fas fa-money-check-alt"></i>
                                     <p>
-                                        Transaksi
+                                        Tabel Transaksi
                                         <i class="fas fa-angle-left right"></i>
                                     </p>
                                 </a>

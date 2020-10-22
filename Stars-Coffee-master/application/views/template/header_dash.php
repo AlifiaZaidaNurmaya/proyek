@@ -92,7 +92,7 @@ if ('admin' != ($this->session->userdata('level'))) {
                             <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
                             <li class="nav-item">
-                                <a href="admin/home" class="nav-link">
+                                <a href="<?= base_url(); ?>admin/home" class="nav-link">
                                     <i class="nav-icon fas fa-columns"></i>
                                     <p>
                                         Tabel Pelanggan
@@ -100,7 +100,7 @@ if ('admin' != ($this->session->userdata('level'))) {
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="pages/widgets.html" class="nav-link">
+                                <a href="<?= base_url(); ?>admin/produk" class="nav-link">
                                     <i class="nav-icon fas fa-columns"></i>
                                     <p>
                                         Tabel Petugas
@@ -116,7 +116,7 @@ if ('admin' != ($this->session->userdata('level'))) {
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="pages/widgets.html" class="nav-link">
+                                <a href="<?= base_url(); ?>admin/kategori" class="nav-link">
                                     <i class="nav-icon fas fa-columns"></i>
                                     <p>
                                         Tabel Entry
