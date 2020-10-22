@@ -10,5 +10,8 @@
     <string name="no_telepon">No. Telepon</string>
     <string name="alamat">Alamat</string>
     <string name="no_plat">Nomor Plat</string>
+    <string name="e_wallet">E-Wallet</string>
+    <string name="sync">Sync now</string>
+    <string name="no">080xxxxxx123</string>
 
 </resources>
