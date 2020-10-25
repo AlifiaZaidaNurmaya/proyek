@@ -39,7 +39,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/parkir_assistant_text"
-        android:visibility="invisible">
+        android:visibility="visible">
 
         <Button
             android:id="@+id/button"
@@ -53,12 +53,14 @@
             android:textColor="@android:color/white"
             android:textSize="12sp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/parkir_assistant_text" />
+            app:layout_constraintTop_toBottomOf="@id/parkir_assistant_text"
+            android:onClick="onClickLogin"/>
 
         <Space
             android:layout_width="10dp"
             android:layout_height="wrap_content"
             />
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -68,7 +70,8 @@
             android:textSize="12sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/button"
-            app:layout_constraintTop_toBottomOf="@+id/parkir_assistant_text" />
+            app:layout_constraintTop_toBottomOf="@+id/parkir_assistant_text"
+            android:onClick="onClickSignUp"/>
 
     </LinearLayout>
 
@@ -78,12 +81,13 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="50dp"
         android:layout_marginBottom="32dp"
+        android:layout_marginRight="160dp"
+        android:layout_marginEnd="160dp"
         app:layout_constraintBottom_toTopOf="@+id/relativeLayout"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.159"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0">
+        android:visibility="invisible">
 
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/prof_pic"
@@ -95,8 +99,8 @@
 
         <TextView
             android:id="@+id/Prof_name"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="81dp"
+            android:layout_height="20dp"
             android:layout_centerVertical="true"
             android:layout_toRightOf="@id/prof_pic"
             android:fontFamily="@font/poppins_bold"
@@ -121,7 +125,8 @@
         app:layout_constraintBottom_toTopOf="@+id/relativeLayout"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/relativeLayout2"
-        app:layout_constraintTop_toTopOf="parent"/>
+        app:layout_constraintTop_toTopOf="parent"
+        android:visibility="invisible"/>
 
     <RelativeLayout
         android:id="@+id/relativeLayout"
@@ -133,43 +138,54 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/parkir_assistant_text">
 
-        <LinearLayout
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/saldo"
             android:layout_width="245dp"
             android:layout_height="50dp"
+            android:layout_centerVertical="true"
             android:background="@drawable/bg_saldo"
-            android:elevation="6dp"
-            android:orientation="horizontal"
-            android:translationZ="6dp">
+            android:elevation="6dp">
 
             <ImageView
                 android:layout_width="70dp"
                 android:layout_height="20dp"
                 android:layout_gravity="center"
-                android:layout_marginStart="10dp"
                 android:layout_marginLeft="10dp"
-                android:layout_marginEnd="55dp"
-                android:layout_marginRight="55dp"
-                android:src="@drawable/ovo_logo" />
+                android:layout_marginStart="10dp"
+                android:src="@drawable/ovo_logo"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-            <TextView
+            <RelativeLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:fontFamily="@font/poppins_bold"
-                android:text="IDR"
-                android:textSize="10sp" />
+                android:layout_marginRight="20dp"
+                android:layout_marginEnd="20dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:fontFamily="@font/poppins_bold"
-                android:text="500.000"
-                android:textColor="@android:color/black"
-                android:textSize="18sp" />
+                <TextView
+                    android:id="@+id/idr"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/poppins_bold"
+                    android:text="IDR"
+                    android:textSize="10sp" />
 
-        </LinearLayout>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_toRightOf="@id/idr"
+                    android:fontFamily="@font/poppins_bold"
+                    android:text="-"
+                    android:textColor="@android:color/black"
+                    android:textSize="18sp" />
+            </RelativeLayout>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
         <ImageView
             android:layout_width="50dp"
@@ -181,7 +197,8 @@
             android:src="@drawable/wallet_1"
             android:padding="8dp"
             android:background="@drawable/bg_saldo"
-            android:elevation="6dp" />
+            android:elevation="6dp"
+            android:onClick="onClickEWallet"/>
 
     </RelativeLayout>
 
@@ -243,7 +260,7 @@
             android:layout_marginTop="20dp"
             android:layout_marginEnd="30dp"
             android:layout_marginRight="30dp"
-            android:src="@drawable/ic_home_icon_active" />
+            android:src="@drawable/ic_home_icon"/>
 
         <ImageView
             android:layout_width="wrap_content"
@@ -253,7 +270,8 @@
             android:layout_marginTop="20dp"
             android:layout_marginEnd="30dp"
             android:layout_marginRight="30dp"
-            android:src="@drawable/ic_booking_icon" />
+            android:src="@drawable/ic_booking_icon"
+            android:onClick="onClickBooking"/>
 
         <ImageView
             android:layout_width="wrap_content"
@@ -264,7 +282,6 @@
             android:layout_marginEnd="60dp"
             android:layout_marginRight="60dp"
             android:src="@drawable/ic_profile_icon" />
-
 
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

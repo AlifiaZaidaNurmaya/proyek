@@ -5,5 +5,7 @@
     <color name="colorPrimaryDark">#CF7500</color>
     <color name="colorAccent">#F4F4F4</color>
     <color name="colorOption">#1A1C20</color>
+    <color name="booked_color">#FF0000</color>
+    <color name="not_booked_color">#00FF00</color>
 
 </resources>
