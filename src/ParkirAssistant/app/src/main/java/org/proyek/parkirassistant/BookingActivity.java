@@ -24,16 +24,10 @@ public class BookingActivity extends AppCompatActivity {
         homeIcon = (ImageView) findViewById(R.id.home_icon);
         profileIcon = (ImageView) findViewById(R.id.profile_icon);
 
-        bookingIcon.setColorFilter(Color.WHITE);
-        homeIcon.setColorFilter(R.color.colorOption);
-        profileIcon.setColorFilter(R.color.colorOption);
 
     }
 
     public void onClickHome(View view) {
-        homeIcon.setColorFilter(Color.WHITE);
-        bookingIcon.setColorFilter(Color.BLACK);
-
         Intent i = new Intent(this,HomeScreen.class);
         startActivity(i);
         finish();

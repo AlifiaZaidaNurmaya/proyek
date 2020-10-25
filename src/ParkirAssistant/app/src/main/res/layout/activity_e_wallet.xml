@@ -1,239 +1,299 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    android:fillViewport="true"
     tools:context="org.proyek.parkirassistant.EWalletActivity">
 
-    <ImageView
-        android:id="@+id/header"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:scaleType="fitXY"
-        android:src="@drawable/bg_asset"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:layout_height="wrap_content">
 
-    <TextView
-        android:id="@+id/e_wallet"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginRight="220dp"
-        android:layout_marginTop="55dp"
-        android:fontFamily="@font/poppins_bold"
-        android:text="@string/e_wallet"
-        android:textColor="@android:color/white"
-        android:textSize="30sp"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"/>
+        <ImageView
+            android:id="@+id/header"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:scaleType="fitXY"
+            android:src="@drawable/bg_asset"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    <!--    OVO -->
-    <ImageView
-        android:layout_width="360dp"
-        android:layout_height="120dp"
-        android:layout_gravity="center"
-        android:layout_marginLeft="3dp"
-        android:layout_marginStart="3dp"
-        android:layout_marginTop="180dp"
-        android:src="@drawable/bg_e_wallet"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.491"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        <RelativeLayout
+            android:id="@+id/back_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:layout_marginEnd="220dp"
+            android:layout_marginRight="220dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginStart="20dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:onClick="onClickBack">
 
-    <ImageView
-        android:layout_width="100dp"
-        android:layout_height="27dp"
-        android:layout_marginLeft="30dp"
-        android:layout_marginStart="30dp"
-        android:layout_marginTop="200dp"
-        android:src="@drawable/ovo_logo"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"/>
+            <ImageView
+                android:layout_marginTop="5dp"
+                android:id="@+id/back_arrow"
+                android:layout_width="15dp"
+                android:layout_height="15dp"
+                android:src="@drawable/back_arrow"/>
 
+            <Space
+                android:id="@+id/space"
+                android:layout_width="5dp"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@id/back_arrow"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/kembali"
+                android:textSize="16sp"
+                android:textColor="@android:color/black"
+                android:fontFamily="@font/poppins_bold"
+                android:layout_toRightOf="@id/space"
+                />
 
-    <TextView
-        android:id="@+id/sync_now_ovo"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="195dp"
-        android:layout_marginLeft="200dp"
-        android:fontFamily="@font/poppins_bold"
-        android:text="@string/sync"
-        android:textAlignment="center"
-        android:textColor="@android:color/holo_orange_dark"
-        android:textSize="20sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"/>
+        </RelativeLayout>
 
-    <TextView
-        android:id="@+id/no_ovo"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="245dp"
-        android:layout_marginLeft="40dp"
-        android:fontFamily="@font/poppins_bold"
-        android:text="@string/no"
-        android:textAlignment="center"
-        android:textColor="@android:color/darker_gray"
-        android:textSize="23sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"/>
+        <TextView
+            android:id="@+id/e_wallet"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="200dp"
+            android:layout_marginEnd="200dp"
+            android:layout_marginLeft="35dp"
+            android:layout_marginStart="35dp"
+            android:fontFamily="@font/poppins_bold"
+            android:text="@string/e_wallet"
+            android:textColor="@android:color/white"
+            android:textSize="30sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/header"
+            app:layout_constraintTop_toBottomOf="@id/back_button" />
 
-    <!-- gopay -->
-    <ImageView
-        android:layout_width="360dp"
-        android:layout_height="120dp"
-        android:layout_gravity="center"
-        android:layout_marginLeft="3dp"
-        android:layout_marginTop="310dp"
-        android:src="@drawable/bg_e_wallet"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.491"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        <!--    OVO -->
+        <RelativeLayout
+            android:id="@+id/ovo_layout"
+            android:layout_height="100dp"
+            android:layout_width="300dp"
+            android:layout_gravity="center"
+            android:layout_marginLeft="3dp"
+            android:layout_marginStart="3dp"
+            android:layout_marginTop="180dp"
+            android:background="@drawable/bg_e_wallet"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" >
 
-    <ImageView
-        android:layout_width="125dp"
-        android:layout_height="30dp"
-        android:layout_marginLeft="33dp"
-        android:layout_marginTop="325dp"
-        android:src="@drawable/gopay"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"/>
+            <ImageView
+                android:id="@+id/ovo_logo"
+                android:layout_width="95dp"
+                android:layout_height="22dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginStart="10dp"
+                android:src="@drawable/ovo_logo"/>
 
-    <TextView
-        android:id="@+id/sync_now_gopay"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="326dp"
-        android:layout_marginLeft="200dp"
-        android:fontFamily="@font/poppins_bold"
-        android:text="@string/sync"
-        android:textAlignment="center"
-        android:textColor="@android:color/holo_orange_dark"
-        android:textSize="20sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"/>
+            <TextView
+                android:id="@+id/sync_now_ovo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="100dp"
+                android:layout_marginStart="100dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginEnd="10dp"
+                android:fontFamily="@font/poppins_bold"
+                android:text="@string/sync"
+                android:textAlignment="center"
+                android:textColor="@android:color/holo_orange_dark"
+                android:textSize="16sp"
+                android:layout_toEndOf="@id/ovo_logo"
+                android:layout_toRightOf="@id/ovo_logo"/>
 
-    <TextView
-        android:id="@+id/no_gopay"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="375dp"
-        android:layout_marginLeft="40dp"
-        android:fontFamily="@font/poppins_bold"
-        android:text="@string/no"
-        android:textAlignment="center"
-        android:textColor="@android:color/darker_gray"
-        android:textSize="23sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"/>
+            <TextView
+                android:id="@+id/no_ovo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="50dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginStart="10dp"
+                android:fontFamily="@font/poppins_bold"
+                android:text="@string/no"
+                android:textAlignment="center"
+                android:textColor="@android:color/darker_gray"
+                android:textSize="16sp"/>
 
-    <!--  dana  -->
-    <ImageView
-        android:layout_width="360dp"
-        android:layout_height="120dp"
-        android:layout_gravity="center"
-        android:layout_marginLeft="3dp"
-        android:layout_marginTop="443dp"
-        android:src="@drawable/bg_e_wallet"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.491"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        </RelativeLayout>
 
-    <ImageView
-        android:layout_width="115dp"
-        android:layout_height="33dp"
-        android:layout_marginLeft="33dp"
-        android:layout_marginTop="460dp"
-        android:src="@drawable/dana"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"/>
+        <!-- gopay -->
+        <RelativeLayout
+            android:id="@+id/gopay_layout"
+            android:layout_height="100dp"
+            android:layout_width="300dp"
+            android:layout_gravity="center"
+            android:layout_marginLeft="3dp"
+            android:layout_marginStart="3dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/bg_e_wallet"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/ovo_layout" >
 
-    <TextView
-        android:id="@+id/sync_now_dana"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="465dp"
-        android:layout_marginLeft="200dp"
-        android:fontFamily="@font/poppins_bold"
-        android:text="@string/sync"
-        android:textAlignment="center"
-        android:textColor="@android:color/holo_orange_dark"
-        android:textSize="20sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"/>
+            <ImageView
+                android:id="@+id/gopay_logo"
+                android:layout_width="95dp"
+                android:layout_height="22dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginStart="10dp"
+                android:src="@drawable/gopay"/>
 
-    <TextView
-        android:id="@+id/no_dana"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="510dp"
-        android:layout_marginLeft="40dp"
-        android:fontFamily="@font/poppins_bold"
-        android:text="@string/no"
-        android:textAlignment="center"
-        android:textColor="@android:color/darker_gray"
-        android:textSize="23sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"/>
+            <TextView
+                android:id="@+id/sync_now_gopay"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="100dp"
+                android:layout_marginStart="100dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginEnd="10dp"
+                android:fontFamily="@font/poppins_bold"
+                android:text="@string/sync"
+                android:textAlignment="center"
+                android:textColor="@android:color/holo_orange_dark"
+                android:textSize="16sp"
+                android:layout_toEndOf="@id/gopay_logo"
+                android:layout_toRightOf="@id/gopay_logo"/>
 
-    <!--  LinkAja  -->
-    <ImageView
-        android:layout_width="360dp"
-        android:layout_height="120dp"
-        android:layout_gravity="center"
-        android:layout_marginLeft="3dp"
-        android:layout_marginTop="575dp"
-        android:src="@drawable/bg_e_wallet"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.491"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+            <TextView
+                android:id="@+id/no_gopay"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="50dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginStart="10dp"
+                android:fontFamily="@font/poppins_bold"
+                android:text="@string/no"
+                android:textAlignment="center"
+                android:textColor="@android:color/darker_gray"
+                android:textSize="16sp"/>
 
-    <ImageView
-        android:layout_width="120dp"
-        android:layout_height="30dp"
-        android:layout_marginLeft="33dp"
-        android:layout_marginTop="593dp"
-        android:src="@drawable/linkaja"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"/>
+        </RelativeLayout>
 
-    <TextView
-        android:id="@+id/sync_now_linkaja"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="600dp"
-        android:layout_marginLeft="200dp"
-        android:fontFamily="@font/poppins_bold"
-        android:text="@string/sync"
-        android:textAlignment="center"
-        android:textColor="@android:color/holo_orange_dark"
-        android:textSize="20sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"/>
+        <!--  dana  -->
+        <RelativeLayout
+            android:id="@+id/dana_layout"
+            android:layout_height="100dp"
+            android:layout_width="300dp"
+            android:layout_gravity="center"
+            android:layout_marginLeft="3dp"
+            android:layout_marginStart="3dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/bg_e_wallet"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/gopay_layout" >
 
-    <TextView
-        android:id="@+id/no_linkaja"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="638dp"
-        android:layout_marginLeft="40dp"
-        android:fontFamily="@font/poppins_bold"
-        android:text="@string/no"
-        android:textAlignment="center"
-        android:textColor="@android:color/darker_gray"
-        android:textSize="23sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"/>
-</androidx.constraintlayout.widget.ConstraintLayout>
+            <ImageView
+                android:id="@+id/dana_logo"
+                android:layout_width="95dp"
+                android:layout_height="22dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginStart="10dp"
+                android:src="@drawable/dana"/>
+
+            <TextView
+                android:id="@+id/sync_now_dana"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="100dp"
+                android:layout_marginStart="100dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginEnd="10dp"
+                android:fontFamily="@font/poppins_bold"
+                android:text="@string/sync"
+                android:textAlignment="center"
+                android:textColor="@android:color/holo_orange_dark"
+                android:textSize="16sp"
+                android:layout_toEndOf="@id/dana_logo"
+                android:layout_toRightOf="@id/dana_logo"/>
+
+            <TextView
+                android:id="@+id/no_dana"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="50dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginStart="10dp"
+                android:fontFamily="@font/poppins_bold"
+                android:text="@string/no"
+                android:textAlignment="center"
+                android:textColor="@android:color/darker_gray"
+                android:textSize="16sp"/>
+        </RelativeLayout>
+
+        <!--  LinkAja  -->
+        <RelativeLayout
+            android:id="@+id/linkaja_layout"
+            android:layout_height="100dp"
+            android:layout_width="300dp"
+            android:layout_gravity="center"
+            android:layout_marginLeft="3dp"
+            android:layout_marginStart="3dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/bg_e_wallet"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/dana_layout" >
+
+            <ImageView
+                android:id="@+id/linkaja_logo"
+                android:layout_width="95dp"
+                android:layout_height="22dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginStart="10dp"
+                android:src="@drawable/linkaja"/>
+
+            <TextView
+                android:id="@+id/sync_now_linkaja"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="100dp"
+                android:layout_marginStart="100dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginEnd="10dp"
+                android:fontFamily="@font/poppins_bold"
+                android:text="@string/sync"
+                android:textAlignment="center"
+                android:textColor="@android:color/holo_orange_dark"
+                android:textSize="16sp"
+                android:layout_toEndOf="@id/linkaja_logo"
+                android:layout_toRightOf="@id/linkaja_logo"/>
+
+            <TextView
+                android:id="@+id/no_linkaja"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="50dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginStart="10dp"
+                android:fontFamily="@font/poppins_bold"
+                android:text="@string/no"
+                android:textAlignment="center"
+                android:textColor="@android:color/darker_gray"
+                android:textSize="16sp"/>
+
+        </RelativeLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>

@@ -23,9 +23,6 @@ public class HomeScreen extends AppCompatActivity {
         homeIcon = (ImageView) findViewById(R.id.home_icon);
         profileIcon = (ImageView) findViewById(R.id.profile_icon);
 
-        bookingIcon.setColorFilter(R.color.colorOption);
-        homeIcon.setColorFilter(Color.WHITE);
-        profileIcon.setColorFilter(R.color.colorOption);
     }
 
     public void onClickLogin(View view) {
@@ -41,8 +38,6 @@ public class HomeScreen extends AppCompatActivity {
     }
 
     public void onClickBooking(View view) {
-        bookingIcon.setColorFilter(Color.WHITE);
-        homeIcon.setColorFilter(R.color.colorOption);
 
         Intent i = new Intent(this,BookingActivity.class);
         startActivity(i);
