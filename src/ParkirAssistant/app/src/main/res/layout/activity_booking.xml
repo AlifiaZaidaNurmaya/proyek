@@ -444,11 +444,10 @@
                 android:paddingLeft="7dp"
                 android:paddingStart="7dp"
                 android:hint="1C"
-                android:inputType="number"
+                android:inputType="text"
                 android:textSize="9sp"
                 android:textColorHint="@android:color/black"
                 android:background="@drawable/bg_input_nomor_parkir"
-                android:enabled="false"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/nomor_parkir_booking_label" />
             

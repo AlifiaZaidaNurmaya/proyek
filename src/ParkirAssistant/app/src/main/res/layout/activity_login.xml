@@ -9,7 +9,7 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         tools:context=".LoginActivity">
 
         <ImageView
@@ -150,7 +150,8 @@
             android:text="@string/sign_up"
             android:textAlignment="center"
             android:textColor="@android:color/black"
-            android:textSize="20sp"
+            android:textSize="16sp"
+            android:onClick="onClickSignUp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -168,11 +169,11 @@
             android:background="@drawable/bg_btn"
             android:fontFamily="@font/poppins_bold"
             android:paddingTop="8dp"
-            android:paddingLeft="23dp"
-            android:paddingStart="23dp"
+            android:paddingLeft="25dp"
+            android:paddingStart="25dp"
             android:text="@string/login"
             android:textColor="@android:color/black"
-            android:textSize="20sp"
+            android:textSize="16sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
