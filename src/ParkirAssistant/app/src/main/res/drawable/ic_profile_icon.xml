@@ -4,11 +4,9 @@
     android:viewportWidth="23"
     android:viewportHeight="25">
   <path
-      android:name="profile_icon"
       android:pathData="M11.7347,5.9707m-5.9707,0a5.9707,5.9707 0,1 1,11.9414 0a5.9707,5.9707 0,1 1,-11.9414 0"
       android:fillColor="#1A1C20"/>
   <path
-      android:name="profile_icon"
       android:pathData="M0,24.6292H22.723C21.7,18.2526 17.0022,13.4341 11.3615,13.4341C5.7208,13.4341 1.023,18.2526 0,24.6292Z"
       android:fillColor="#1A1C20"
       android:fillType="evenOdd"/>

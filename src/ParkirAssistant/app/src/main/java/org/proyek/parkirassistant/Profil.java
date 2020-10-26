@@ -1,14 +1,14 @@
-package org.aplas.parkirassistant;
+package org.proyek.parkirassistant;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 
-public class EWalletActivity extends AppCompatActivity {
+public class Profil extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_e_wallet);
+        setContentView(R.layout.activity_profil);
     }
 }
