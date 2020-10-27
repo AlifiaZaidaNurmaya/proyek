@@ -14,7 +14,7 @@
                 </div>
                 <?php endif ?>
                     <form action="" method="post" enctype="multipart/form-data">
-                        <input type="hidden" name="id" value="<?= $user['id_pelanggan'];?>">
+                        <input type="hidden" name="id" value="<?= $pelanggan['id_pelanggan'];?>">
                     <!-- http://getbootstrap.com/docs/4.1/components/card/forms/ -->
                     <div class="form-group">
                         <label for="id_pelanggan">ID Pelanggan</label>
@@ -22,7 +22,7 @@
                             class="form-control"
                             id="id_pelanggan"
                             name="id_pelanggan"
-                        value="<?= $user['id_pelanggan'];?>">
+                        value="<?= $pelanggan['id_pelanggan'];?>">
                     </div>
                     <div class="form-group">
                         <label for="nama">Nama</label>
@@ -30,7 +30,7 @@
                             class="form-control"
                             id="nama"
                             name="nama"
-                        value="<?= $user['nama'];?>">
+                        value="<?= $pelanggan['nama'];?>">
                     </div>
                     <div class="form-group">
                         <label for="password">Password</label>
@@ -38,7 +38,7 @@
                             class="form-control"
                             id="password"
                             name="password"
-                        value="<?= $user['password'];?>">
+                        value="<?= $pelanggan['password'];?>">
                     </div>
                     <div class="form-group">
                         <label for="alamat">Alamat</label>
@@ -46,7 +46,7 @@
                             class="form-control"
                             id="alamat"
                             name="alamat"
-                        value="<?= $user['alamat'];?>">
+                        value="<?= $pelanggan['alamat'];?>">
                     </div>
                     <div class="form-group">
                         <label for="nomor_plat">No. Plat</label>
@@ -54,7 +54,7 @@
                             class="form-control"
                             id="nomor_plat"
                             name="nomor_plat"
-                        value="<?= $user['nomor_plat'];?>">
+                        value="<?= $pelanggan['nomor_plat'];?>">
                     </div>
                     <div class="form-group">
                         <label for="nomor_telepon">No. Telepon</label>
@@ -62,7 +62,7 @@
                             class="form-control"
                             id="nomor_telepon"
                             name="nomor_telepon"
-                        value="<?= $user['nomor_telepon'];?>">
+                        value="<?= $pelanggan['nomor_telepon'];?>">
                     </div>
                     <div class="form-group">
                         <label for="no_identitas">No. Identitas</label>
@@ -70,7 +70,7 @@
                             class="form-control"
                             id="no_identitas"
                             name="no_identitas"
-                        value="<?= $user['no_identitas'];?>">
+                        value="<?= $pelanggan['no_identitas'];?>">
                     </div>
                     <div class="form-group">
                         <label for="email">Email</label>
@@ -78,7 +78,7 @@
                             class="form-control"
                             id="email"
                             name="email"
-                        value="<?= $user['email'];?>">
+                        value="<?= $pelanggan['email'];?>">
                     </div>
                     <div class="form-group">
                         <label for="huruf_acak">Huruf Acak</label>
@@ -86,7 +86,7 @@
                             class="form-control"
                             id="huruf_acak"
                             name="huruf_acak"
-                        value="<?= $user['huruf_acak'];?>">
+                        value="<?= $pelanggan['huruf_acak'];?>">
                     </div>
 
                     <button type="submit" name="submit" class="btn btn-primary float-right" > Edit </button>

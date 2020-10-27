@@ -13,7 +13,7 @@
     <?php endif; ?>
     <div class="row mt-4">
         <div class="col-md-6">
-            <a href="<?= base_url(); ?>user/tambah" class="btn btn-primary"> Tambah Data </a>
+            <a href="<?= base_url(); ?>pelanggan/tambah" class="btn btn-primary"> Tambah Data </a>
         </div>
     </div>
 
@@ -35,7 +35,7 @@
             <h2> Daftar Pelanggan </h2>
 
             <!-- alert -->
-            <?php if (empty($user)) : ?>
+            <?php if (empty($pelanggan)) : ?>
                 <div class="alert alert-danger" role="alert">
                     Data Pelanggan Tidak ditemukan
                 </div>
@@ -60,19 +60,19 @@
                     </tr>
                 </thead>
                 <tbody>
-                     <?php foreach ($user as $us) { ?>
+                     <?php foreach ($pelanggan as $p) { ?>
                     <tr>
-                        <td><?php echo $us['id_pelanggan']; ?></td>
-                        <td><?php echo $us['nama']; ?></td>
-                        <td><?php echo $us['password']; ?></td>
-                        <td><?php echo $us['alamat']; ?></td>
-                        <td><?php echo $us['nomor_plat']; ?></td>
-                        <td><?php echo $us['nomor_telepon']; ?></td>
-                        <td><?php echo $us['no_identitas']; ?></td>
-                        <td><?php echo $us['email']; ?></td>
-                        <td><?php echo $us['huruf_acak']; ?></td>
-                        <td><a href="<?= base_url(); ?>user/hapus/<?= $us['id_pelanggan']; ?>" class="badge badge-danger float-right" onclick="return confirm('Yakin Data ini akan dihapus');">Hapus</a></td>
-                        <td><a href="<?= base_url(); ?>user/edit/<?= $us['id_pelanggan']; ?>" class="badge badge-success float-right">Edit</a></td>
+                        <td><?php echo $p['id_pelanggan']; ?></td>
+                        <td><?php echo $p['nama']; ?></td>
+                        <td><?php echo $p['password']; ?></td>
+                        <td><?php echo $p['alamat']; ?></td>
+                        <td><?php echo $p['nomor_plat']; ?></td>
+                        <td><?php echo $p['nomor_telepon']; ?></td>
+                        <td><?php echo $p['no_identitas']; ?></td>
+                        <td><?php echo $p['email']; ?></td>
+                        <td><?php echo $p['huruf_acak']; ?></td>
+                        <td><a href="<?= base_url(); ?>pelanggan/hapus/<?= $p['id_pelanggan']; ?>" class="badge badge-danger float-right" onclick="return confirm('Yakin Data ini akan dihapus');">Hapus</a></td>
+                        <td><a href="<?= base_url(); ?>pelanggan/edit/<?= $p['id_pelanggan']; ?>" class="badge badge-success float-right">Edit</a></td>
                     </tr>
                 <?php } ?>
                 </tbody>

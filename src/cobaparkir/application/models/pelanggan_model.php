@@ -1,14 +1,14 @@
 <?php
 
-class user_model extends CI_Model {
+class pelanggan_model extends CI_Model {
 
-    public function getAllUser()
+    public function getAllPelanggan()
     {
-        $query = $this->db->get('user');
+        $query = $this->db->get('pelanggan');
         return $query->result_array();
     }
 
-    public function tambahDataUser()
+    public function tambahDataPelanggan()
     {
         $data = [
             "id_pelanggan" => $this->input->post('id_pelanggan', true),
@@ -21,21 +21,21 @@ class user_model extends CI_Model {
             "email" => $this->input->post('email', true),
             "huruf_acak" => $this->input->post('huruf_acak', true)
         ];
-        $this->db->insert('user', $data);
+        $this->db->insert('pelanggan', $data);
     }
 
-    public function hapusDataUser($id)
+    public function hapusDataPelanggan($id)
     {
         $this->db->where('id_pelanggan', $id);
-        $this->db->delete('user');
+        $this->db->delete('pelanggan');
     }
 
-    public function getUserByID($id)
+    public function getPelangganByID($id)
     {
-        return $this->db->get_where('user', ['id_pelanggan' => $id])->row_array();
+        return $this->db->get_where('pelanggan', ['id_pelanggan' => $id])->row_array();
     }
 
-    public function editDataUser()
+    public function editDataPelanggan()
     {
         $data = [
             "id_pelanggan" => $this->input->post('id_pelanggan', true),
@@ -49,14 +49,14 @@ class user_model extends CI_Model {
             "huruf_acak" => $this->input->post('huruf_acak', true)
         ];
         $this->db->where('id_pelanggan', $this->input->post('id_pelanggan'));
-        $this->db->update('user', $data);
+        $this->db->update('pelanggan', $data);
     }
 
-    public function cariDataUser()
+    public function cariDataPelanggan()
     {
         $keyword = $this->input->post('keyword');
         $this->db->like('nama', $keyword);
-        return $this->db->get('user')->result_array();
+        return $this->db->get('pelanggan')->result_array();
     }
 }
 
