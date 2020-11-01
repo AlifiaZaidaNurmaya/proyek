@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container" style="margin-left:300px;">
     <div class="row mt-3">
         <div class="col-md-6">
             <!-- http://getbootstrap.com/docs/4.1/components/card/ -->
@@ -22,7 +22,7 @@
                             class="form-control"
                             id="id_pelanggan"
                             name="id_pelanggan"
-                        value="<?= $pelanggan['id_pelanggan'];?>">
+                        value="<?= $pelanggan['id_pelanggan'];?>" readonly>
                     </div>
                     <div class="form-group">
                         <label for="nama">Nama</label>
@@ -86,7 +86,7 @@
                             class="form-control"
                             id="huruf_acak"
                             name="huruf_acak"
-                        value="<?= $pelanggan['huruf_acak'];?>">
+                        value="<?= $pelanggan['huruf_acak'];?>" readonly>
                     </div>
 
                     <button type="submit" name="submit" class="btn btn-primary float-right" > Edit </button>

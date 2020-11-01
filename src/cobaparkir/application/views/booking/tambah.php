@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container" style="margin-left:300px;">
     <div class="row mt-3">
         <div class="col-md-6">
             <!-- http://getbootstrap.com/docs/4.1/components/card/ -->
@@ -16,20 +16,32 @@
                     <form action="" method="post" enctype="multipart/form-data">
                     <!-- http://getbootstrap.com/docs/4.1/components/card/forms/ -->
                     <div class="form-group">
-                        <label for="id_booking">ID Pelanggan</label>
-                        <input type="int" class="form-control" id="id_booking" name="id_booking">
+                        <label for="id_pelanggan">Nama Pelanggan</label>
+                        <select name="id_pelanggan" id="id_pelanggan" class="form-control">
+                            <?php foreach ($pelanggan as $p) :?>
+                            <option value="<?= $p['id_pelanggan'];?>">
+                                <?= $p['nama']; ?>    
+                            </option>
+                            <?php endforeach;?>
+                        </select>
                     </div>
                     <div class="form-group">
-                        <label for="id_pelanggan">ID Pelanggan</label>
-                        <input type="int" class="form-control" id="id_pelanggan" name="id_pelanggan">
-                    </div>
-                    <div class="form-group">
-                        <label for="no_parkir">No. Parkir</label>
-                        <input type="text" class="form-control" id="no_parkir" name="no_parkir">
+                        <label for="no_parkir">Nomor Parkir</label>
+                        <select class="form-control" id="id_parkir" name="id_parkir">
+                            <?php foreach ($booking as $b) :?>
+                                <?php foreach ($parkir as $pk) :?>
+                                    <?php if($pk['no_parkir'] != $b['no_parkir']) :?>
+                                        <option value="<?= $pk['id_parkir'];?>">
+                                            <?= $pk['no_parkir']; ?>    
+                                        </option>
+                                    <?php endif;?>
+                                <?php endforeach;?>
+                            <?php endforeach;?>
+                        </select>
                     </div>
                     <div class="form-group">
                         <label for="jam_booking">Jam Booking</label>
-                        <input type="text" class="form-control" id="jam_booking" name="jam_booking">
+                        <input type="text" class="form-control" id="jam_booking" name="jam_booking" value="<?= date('Y-m-d H:i:s'); ?>" readonly>
                     </div>
                     <button type="submit" name="submit" class="btn btn-primary float-right" > Submit </button>
                     </form>

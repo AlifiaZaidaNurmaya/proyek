@@ -14,6 +14,7 @@ class superadmin_model extends CI_Model {
             "id_admin" => $this->input->post('id_admin', true),
             "nama" => $this->input->post('nama', true),
             "email" => $this->input->post('email', true),
+            "username" => $this->input->post('username', true),
             "password" => $this->input->post('password', true),
             "alamat" => $this->input->post('alamat', true),
             "no_telepon" => $this->input->post('no_telepon', true)

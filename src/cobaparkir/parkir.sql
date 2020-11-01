@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 27, 2020 at 01:07 AM
+-- Generation Time: Oct 27, 2020 at 10:41 AM
 -- Server version: 10.1.37-MariaDB
 -- PHP Version: 7.3.1
 
@@ -40,7 +40,7 @@ CREATE TABLE `booking` (
 --
 
 INSERT INTO `booking` (`id_booking`, `id_pelanggan`, `no_parkir`, `jam_booking`) VALUES
-(123, 6, 456, '15.35 PM');
+(2, 11, 12, '15.00');
 
 -- --------------------------------------------------------
 
@@ -164,7 +164,8 @@ INSERT INTO `transaksi` (`id_transaksi`, `id_entry`, `jenis_transaksi`, `jam_che
 -- Indexes for table `booking`
 --
 ALTER TABLE `booking`
-  ADD PRIMARY KEY (`id_booking`);
+  ADD PRIMARY KEY (`id_booking`),
+  ADD KEY `id_pelanggan` (`id_pelanggan`);
 
 --
 -- Indexes for table `entry`
@@ -235,6 +236,16 @@ ALTER TABLE `super_admin`
 --
 ALTER TABLE `transaksi`
   MODIFY `id_transaksi` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=124;
+
+--
+-- Constraints for dumped tables
+--
+
+--
+-- Constraints for table `booking`
+--
+ALTER TABLE `booking`
+  ADD CONSTRAINT `booking_ibfk_1` FOREIGN KEY (`id_pelanggan`) REFERENCES `pelanggan` (`id_pelanggan`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

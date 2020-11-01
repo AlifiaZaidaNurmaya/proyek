@@ -17,9 +17,9 @@ class petugas extends CI_Controller {
             $data['petugas'] = $this->petugas_model->cariDataPetugas();
         }
 
-        $this->load->view('template/header',$data);
+        $this->load->view('template/adm_header',$data);
         $this->load->view('petugas/index',$data);
-        $this->load->view('template/footer');
+        $this->load->view('template/adm_table_footer');
 
     }
 
@@ -35,9 +35,9 @@ class petugas extends CI_Controller {
         $this->form_validation->set_rules('no_telepon', 'no_telepon', 'required');
 
         if ($this->form_validation->run() == FALSE) {
-            $this->load->view('template/header', $data);
+            $this->load->view('template/adm_header', $data);
             $this->load->view('petugas/tambah', $data);
-            $this->load->view('template/footer');
+            $this->load->view('template/adm_footer_form');
         }
         else {
             $this->petugas_model->tambahDataPetugas();
@@ -66,9 +66,9 @@ class petugas extends CI_Controller {
         $this->form_validation->set_rules('no_telepon', 'no_telepon', 'required');
 
         if ($this->form_validation->run() == FALSE) {
-            $this->load->view('template/header', $data);
+            $this->load->view('template/adm_header', $data);
             $this->load->view('petugas/edit', $data);
-            $this->load->view('template/footer');
+            $this->load->view('template/adm_footer_form');
         } else {
             $this->petugas_model->editDataPetugas();
             $this->session->set_flashdata('flash-data','diedit');

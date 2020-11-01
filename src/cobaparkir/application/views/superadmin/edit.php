@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container" style="margin-left:300px;">
     <div class="row mt-3">
         <div class="col-md-6">
             <!-- http://getbootstrap.com/docs/4.1/components/card/ -->
@@ -22,7 +22,7 @@
                             class="form-control"
                             id="id_admin"
                             name="id_admin"
-                        value="<?= $super_admin['id_admin'];?>">
+                        value="<?= $super_admin['id_admin'];?>" readonly>
                     </div>
                     <div class="form-group">
                         <label for="nama">Nama</label>

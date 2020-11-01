@@ -48,6 +48,7 @@
                         <th scope="col">ID Admin</th>
                         <th scope="col">Nama</th>
                         <th scope="col">Email</th>
+                        <th scope="col">Username</th>
                         <th scope="col">Password</th>
                         <th scope="col">Alamat</th>
                         <th scope="col">No. Telepon</th>
@@ -62,6 +63,7 @@
                         <td><?php echo $sa['id_admin']; ?></td>
                         <td><?php echo $sa['nama']; ?></td>
                         <td><?php echo $sa['email']; ?></td>
+                        <td><?php echo $sa['username']; ?></td>
                         <td><?php echo $sa['password']; ?></td>
                         <td><?php echo $sa['alamat']; ?></td>
                         <td><?php echo $sa['no_telepon']; ?></td>

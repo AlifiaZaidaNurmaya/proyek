@@ -1,4 +1,15 @@
-<div class="container">
+<?php 
+function generateRandomString() {
+    $characters = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    $charactersLength = strlen($characters);
+    $randomString = '';
+    for ($i = 0; $i < 4; $i++) {
+        $randomString .= $characters[rand(0, $charactersLength - 1)];
+    }
+    return $randomString;
+}
+?>
+<div class="container" style="margin-left:300px;">
     <div class="row mt-3">
         <div class="col-md-6">
             <!-- http://getbootstrap.com/docs/4.1/components/card/ -->
@@ -24,8 +35,12 @@
                         <input type="text" class="form-control" id="nama" name="nama">
                     </div>
                     <div class="form-group">
+                        <label for="username">Username</label>
+                        <input type="text" class="form-control" id="username" name="username">
+                    </div>
+                    <div class="form-group">
                         <label for="password">Password</label>
-                        <input type="text" class="form-control" id="password" name="password">
+                        <input type="password" class="form-control" id="password" name="password">
                     </div>
                     <div class="form-group">
                         <label for="alamat">Alamat</label>
@@ -37,11 +52,11 @@
                     </div>
                     <div class="form-group">
                         <label for="nomor_telepon">No. Telepon</label>
-                        <input type="int" class="form-control" id="nomor_telepon" name="nomor_telepon">
+                        <input type="text" class="form-control" id="nomor_telepon" name="nomor_telepon">
                     </div>
                     <div class="form-group">
                         <label for="no_identitas">No. Identitas</label>
-                        <input type="int" class="form-control" id="no_identitas" name="no_identitas">
+                        <input type="text" class="form-control" id="no_identitas" name="no_identitas">
                     </div>
                     <div class="form-group">
                         <label for="email">Email</label>
@@ -49,7 +64,7 @@
                     </div>
                     <div class="form-group">
                         <label for="huruf_acak">Huruf Acak</label>
-                        <input type="text" class="form-control" id="huruf_acak" name="huruf_acak">
+                        <input type="text" class="form-control" id="huruf_acak" name="huruf_acak" value="<?= generateRandomString(); ?>" readonly>
                     </div>
                     <button type="submit" name="submit" class="btn btn-primary float-right" > Submit </button>
                     </form>
