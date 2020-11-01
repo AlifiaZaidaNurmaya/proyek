@@ -5,6 +5,8 @@ class booking extends CI_Controller {
     {
         parent::__construct();
         $this->load->model('booking_model');
+        $this->load->model('pelanggan_model');
+        $this->load->model('tempatparkir_model','tempat_parkir');
         $this->load->library('form_validation');
     }
 
@@ -17,25 +19,26 @@ class booking extends CI_Controller {
             $data['booking'] = $this->booking_model->cariDataBooking();
         }
 
-        $this->load->view('template/header',$data);
+        $this->load->view('template/adm_header',$data);
         $this->load->view('booking/index',$data);
-        $this->load->view('template/footer');
+        $this->load->view('template/adm_table_footer');
 
     }
 
     public function tambah() {
         $data['title'] = 'Form Menambahkan Data Booking';
+        $data['pelanggan'] = $this->pelanggan_model->getAllPelanggan();
+        $data['booking'] = $this->booking_model->getAllBooking();
+        $data['parkir'] = $this->tempat_parkir->getAllParkir();
 
-        $this->load->library('form_validation');
-        $this->form_validation->set_rules('id_booking', 'Id_booking', 'required');
-        $this->form_validation->set_rules('id_pelanggan', 'Id_pelanggan', 'required');
-        $this->form_validation->set_rules('no_parkir', 'No_parkir', 'required');
-        $this->form_validation->set_rules('jam_booking', 'Jam_booking', 'required');
+        $this->form_validation->set_rules('id_pelanggan', 'Id Pelanggan', 'required');
+        $this->form_validation->set_rules('id_parkir', 'Nomor Parkir', 'required');
+        $this->form_validation->set_rules('jam_booking', 'Jam Booking', 'required');
 
         if ($this->form_validation->run() == FALSE) {
-            $this->load->view('template/header', $data);
+            $this->load->view('template/adm_header', $data);
             $this->load->view('booking/tambah', $data);
-            $this->load->view('template/footer');
+            $this->load->view('template/adm_footer_form');
         }
         else {
             $this->booking_model->tambahDataBooking();
@@ -56,10 +59,7 @@ class booking extends CI_Controller {
         $data['booking']=$this->booking_model->getBookingByID($id);
 
         $this->load->library('form_validation');
-        $this->form_validation->set_rules('id_booking', 'Id_booking', 'required');
-        $this->form_validation->set_rules('id_pelanggan', 'Id_pelanggan', 'required');
-        $this->form_validation->set_rules('no_parkir', 'No_parkir', 'required');
-        $this->form_validation->set_rules('jam_booking', 'Jam_booking', 'required');
+        $this->form_validation->set_rules('id_parkir', 'Nomor Parkir', 'required');
 
         if ($this->form_validation->run() == FALSE) {
             $this->load->view('template/header', $data);

@@ -47,6 +47,9 @@
                     <tr>
                         <th scope="col">ID Booking</th>
                         <th scope="col">ID Pelanggan</th>
+                        <th scope="col">Nama Pelanggan</th>
+                        <th scope="col">Nomor Plat</th>
+                        <th scope="col">Nomor Identitas</th>
                         <th scope="col">No. Parkir</th>
                         <th scope="col">Jam Booking</th>
                         <th scope="col">Hapus</th>
@@ -59,6 +62,9 @@
                     <tr>
                         <td><?php echo $b['id_booking']; ?></td>
                         <td><?php echo $b['id_pelanggan']; ?></td>
+                        <td><?php echo $b['nama']; ?></td>
+                        <td><?php echo $b['nomor_plat']; ?></td>
+                        <td><?php echo $b['no_identitas']; ?></td>
                         <td><?php echo $b['no_parkir']; ?></td>
                         <td><?php echo $b['jam_booking']; ?></td>
                         <td><a href="<?= base_url(); ?>booking/hapus/<?= $b['id_booking']; ?>" class="badge badge-danger float-right" onclick="return confirm('Yakin Data ini akan dihapus');">Hapus</a></td>

@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container" style="margin-left:300px;">
     <div class="row mt-3">
         <div class="col-md-6">
             <!-- http://getbootstrap.com/docs/4.1/components/card/ -->
@@ -22,22 +22,22 @@
                             class="form-control"
                             id="id_booking"
                             name="id_booking"
-                        value="<?= $booking['id_booking'];?>">
+                        value="<?= $booking['id_booking'];?>" readonly>
                     </div>
                     <div class="form-group">
-                        <label for="id_pelanggan">ID Pelanggan</label>
+                        <label for="id_pelanggan">Nama Pelanggan</label>
                         <input type="int"
                             class="form-control"
                             id="id_pelanggan"
                             name="id_pelanggan"
-                        value="<?= $booking['id_pelanggan'];?>">
+                        value="<?= $booking['nama'];?>" readonly>
                     </div>
                     <div class="form-group">
                         <label for="no_parkir">No. Parkir</label>
                         <input type="text"
                             class="form-control"
-                            id="no_parkir"
-                            name="no_parkir"
+                            id="id_parkir"
+                            name="id_parkir"
                         value="<?= $booking['no_parkir'];?>">
                     </div>
                     <div class="form-group">
@@ -46,7 +46,7 @@
                             class="form-control"
                             id="jam_booking"
                             name="jam_booking"
-                        value="<?= $booking['jam_booking'];?>">
+                        value="<?= $booking['jam_booking'];?>" readonly>
                     </div>
                     <button type="submit" name="submit" class="btn btn-primary float-right" > Edit </button>
                     </form>

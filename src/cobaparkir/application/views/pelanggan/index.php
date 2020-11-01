@@ -47,6 +47,7 @@
                     <tr>
                         <th scope="col">ID Pelanggan</th>
                         <th scope="col">Nama</th>
+                        <th scope="col">Username</th>
                         <th scope="col">Password</th>
                         <th scope="col">Alamat</th>
                         <th scope="col">No. Plat</th>
@@ -64,6 +65,7 @@
                     <tr>
                         <td><?php echo $p['id_pelanggan']; ?></td>
                         <td><?php echo $p['nama']; ?></td>
+                        <td><?php echo $p['username']; ?></td>
                         <td><?php echo $p['password']; ?></td>
                         <td><?php echo $p['alamat']; ?></td>
                         <td><?php echo $p['nomor_plat']; ?></td>
