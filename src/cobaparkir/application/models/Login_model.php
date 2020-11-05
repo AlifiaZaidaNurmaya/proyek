@@ -30,6 +30,7 @@ class Login_model extends CI_Model
             "no_telepon" => $this->input->post('no_telepon')
         ];
         $this->db->insert('super_admin', $data);
+          
     }
 }
     

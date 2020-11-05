@@ -47,6 +47,20 @@ class superadmin_model extends CI_Model {
         $this->db->update('super_admin', $data);
     }
 
+    public function register()
+    { 
+            $data = array(
+                "nama" => $this->input->post('nama', true),
+                "email" => $this->input->post('email', true),
+                "username" => $this->input->post('username', true),
+                "password" => $this->input->post('password', true),
+                "alamat" => $this->input->post('alamat', true),
+                "no_telepon" => $this->input->post('no_telepon', true)
+            );
+            $this->db->insert('super_admin', $data);
+        
+    }
+
     public function cariDataAdmin()
     {
         $keyword = $this->input->post('keyword');

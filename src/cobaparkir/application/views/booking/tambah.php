@@ -20,7 +20,7 @@
                         <select name="id_pelanggan" id="id_pelanggan" class="form-control">
                             <?php foreach ($pelanggan as $p) :?>
                             <option value="<?= $p['id_pelanggan'];?>">
-                                <?= $p['nama']; ?>
+                                <?= $p['nama']; ?>    
                             </option>
                             <?php endforeach;?>
                         </select>
@@ -32,7 +32,7 @@
                                 <?php foreach ($parkir as $pk) :?>
                                     <?php if($pk['no_parkir'] != $b['no_parkir']) :?>
                                         <option value="<?= $pk['id_parkir'];?>">
-                                            <?= $pk['no_parkir']; ?>
+                                            <?= $pk['no_parkir']; ?>    
                                         </option>
                                     <?php endif;?>
                                 <?php endforeach;?>

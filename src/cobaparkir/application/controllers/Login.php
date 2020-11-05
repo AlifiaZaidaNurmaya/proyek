@@ -10,6 +10,10 @@ class Login extends CI_Controller
     {
         parent::__construct();
         $this->load->model('Login_model', 'login');
+        //$this->load->model('superadmin_model', 'superadmin');
+        $this->load->library('session');
+        $this->load->helper('form');
+        $this->load->library('form_validation');
         //$this->load->model('admin/user_model', 'user');
     }
     public function index()
@@ -36,15 +40,17 @@ class Login extends CI_Controller
         $this->form_validation->set_rules('email', 'Email', 'required|valid_email');
         $this->form_validation->set_rules('password', 'Password', 'required');
         $this->form_validation->set_rules('alamat', 'Alamat', 'required');
-        $this->form_validation->set_rules('no_telepon', 'Nomor Telepon', 'required|number');
+        //$this->form_validation->set_rules('no_telepon', 'Nomor_Telepon', 'required|number');
 
 
         if ($this->form_validation->run() == FALSE) {
             $this->load->view('register',$data);
-        } else {
-            $this->login->register();
+            
+            } else {
+                $this->login->register();
+                 
             $this->session->set_flashdata('pesan', 'Akun Berhasil Dibuat Silahkan Login :)');
-            redirect('Login/index','refresh');
+            redirect('Login');
         }
     }
 
