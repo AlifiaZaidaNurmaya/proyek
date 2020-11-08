@@ -18,6 +18,34 @@ class Login_model extends CI_Model
             return $query->result();
         }
     }
+    
+    public function login_pelanggan($email, $password)
+    {
+        $this->db->select('*');
+        $this->db->from('pelanggan');
+        $this->db->where('email', $email);
+        $this->db->where('password', $password);
+        $query = $this->db->get();
+        if ($query->num_rows() == 0) {
+            return false;
+        } else {
+            return $query->result_array();
+        }
+    }
+    
+    public function login_petugas($email, $password)
+    {
+        $this->db->select('*');
+        $this->db->from('petugas');
+        $this->db->where('email', $email);
+        $this->db->where('password', $password);
+        $query = $this->db->get();
+        if ($query->num_rows() == 0) {
+            return false;
+        } else {
+            return $query->result_array();
+        }
+    }
 
     public function register(){
     {
@@ -30,7 +58,6 @@ class Login_model extends CI_Model
             "no_telepon" => $this->input->post('no_telepon')
         ];
         $this->db->insert('super_admin', $data);
-          
     }
 }
     

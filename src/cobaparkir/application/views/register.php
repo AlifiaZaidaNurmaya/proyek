@@ -4,18 +4,18 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title><?= $title ?></title>
+    <title><?=$title?></title>
     <!-- Tell the browser to be responsive to screen width -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <!-- Font Awesome -->
-    <link rel="stylesheet" href="<?= base_url(); ?>asset/plugins/fontawesome-free/css/all.min.css">
+    <link rel="stylesheet" href="<?=base_url();?>asset/plugins/fontawesome-free/css/all.min.css">
     <!-- Ionicons -->
     <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
     <!-- icheck bootstrap -->
-    <link rel="stylesheet" href="<?= base_url(); ?>asset/plugins/icheck-bootstrap/icheck-bootstrap.min.css">
+    <link rel="stylesheet" href="<?=base_url();?>asset/plugins/icheck-bootstrap/icheck-bootstrap.min.css">
     <!-- Theme style -->
-    <link rel="stylesheet" href="<?= base_url(); ?>asset/dist/css/adminlte.min.css">
+    <link rel="stylesheet" href="<?=base_url();?>asset/dist/css/adminlte.min.css">
     <!-- Google Font: Source Sans Pro -->
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
 </head>
@@ -34,10 +34,7 @@
         <div class="card">
             <div class="card-body register-card-body">
                 <p class="login-box-msg">Buat Akun Baru</p>
-                <?php echo validation_errors(); ?>
-                <?= form_open('login/register') ?>
-                <form action="" method="post">
-
+                <?php echo form_open_multipart('login/register')?>
                     <!-- nama -->
                     <div class="input-group mb-3">
                         <input type="text" name='nama' class="form-control" placeholder="Nama Lengkap">
@@ -76,7 +73,7 @@
                     </div>
                     <!-- alamat -->
                     <div class="input-group mb-3">
-                        <input type="text" name="alamat" id="alamat" class="form-control" placeholder="Alamat">
+                    <input type="text" name="alamat" id="alamat" class="form-control" placeholder="Alamat">
                         <div class="input-group-append">
                             <div class="input-group-text">
                                 <span class="fas fa-home"></span>
@@ -85,7 +82,7 @@
                     </div>
                     <!-- no telepon -->
                     <div class="input-group mb-3">
-                        <input type="tel" name="no_telepon" class="form-control" placeholder="Nomor_Telepon">
+                        <input type="number" name="no_telepon" class="form-control" placeholder="Nomor Telepon">
                         <div class="input-group-append">
                             <div class="input-group-text">
                                 <span class="fas fa-address-book"></span>
@@ -96,7 +93,7 @@
                         <!-- /.col -->
                         <div class="col-8">
                             <p class="mb-0">
-                                <a href="<?= base_url(); ?>login" class="text-center">Sudah Punya Akun?</a>
+                                <a href="<?=base_url();?>login" class="text-center">Sudah Punya Akun?</a>
                             </p>
                         </div>
                         <div class="col-4">
@@ -104,8 +101,7 @@
                         </div>
                         <!-- /.col -->
                     </div>
-                </form>
-                <?php echo form_close(); ?>
+                <?php echo form_close();?>
             </div>
             <!-- /.form-box -->
         </div><!-- /.card -->
@@ -113,11 +109,11 @@
     <!-- /.register-box -->
 
     <!-- jQuery -->
-    <script src="<?= base_url(); ?>asset/plugins/jquery/jquery.min.js"></script>
+    <script src="<?=base_url();?>asset/plugins/jquery/jquery.min.js"></script>
     <!-- Bootstrap 4 -->
-    <script src="<?= base_url(); ?>asset/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="<?=base_url();?>asset/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
     <!-- AdminLTE App -->
-    <script src="<?= base_url(); ?>asset/dist/js/adminlte.min.js"></script>
+    <script src="<?=base_url();?>asset/dist/js/adminlte.min.js"></script>
 </body>
 
 </html>

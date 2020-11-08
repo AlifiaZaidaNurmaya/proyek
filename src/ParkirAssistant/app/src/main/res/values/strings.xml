@@ -16,5 +16,8 @@
     <string name="parkir_assistant">PARKIR ASSISTANT</string>
     <string name="kembali">Kembali</string>
     <string name="profil">Profile</string>
+    <string name="scan">Scan</string>
+    <string name="pindai_qr_code">Pindai QR Code</string>
+    <string name="keterangan_penggunaan">Keterangan penggunaan</string>
 
 </resources>

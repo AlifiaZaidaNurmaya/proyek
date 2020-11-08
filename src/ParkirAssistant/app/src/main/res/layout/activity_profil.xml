@@ -5,12 +5,47 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+
+    <LinearLayout
+        android:id="@+id/before_login_layout_profile"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toTopOf="@id/bg_btn_rounded"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:visibility="invisible">
+
+        <TextView
+            android:id="@+id/text_logo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="188dp"
+            android:text="Login Terlebih Dahulu"
+            android:textAllCaps="true"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="25sp"
+            android:fontFamily="@font/poppins_bold" />
+
+        <ImageView
+            android:id="@+id/logo_splash"
+            android:layout_width="300dp"
+            android:layout_height="300dp"
+            android:layout_marginBottom="255dp"
+            android:src="@drawable/bg_before_login"
+            android:contentDescription="TODO" />
+
+    </LinearLayout>
+
     <ScrollView
+        android:id="@+id/scroll_layout_profile"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        android:visibility="visible">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -27,48 +62,11 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <RelativeLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="30dp"
-                android:layout_marginEnd="220dp"
-                android:layout_marginRight="220dp"
-                android:onClick="onClickBack"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent">
-
-                <ImageView
-                    android:id="@+id/back_arrow"
-                    android:layout_width="15dp"
-                    android:layout_height="15dp"
-                    android:layout_marginTop="5dp"
-                    android:src="@drawable/back_arrow" />
-
-                <Space
-                    android:id="@+id/space"
-                    android:layout_width="5dp"
-                    android:layout_height="wrap_content"
-                    android:layout_toRightOf="@id/back_arrow" />
-
-                <TextView
-                    android:id="@+id/kembali"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_toRightOf="@id/space"
-                    android:fontFamily="@font/poppins_bold"
-                    android:text="@string/kembali"
-                    android:textColor="@android:color/black"
-                    android:textSize="16sp" />
-
-            </RelativeLayout>
-
             <TextView
                 android:id="@+id/login"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="55dp"
-                android:layout_marginTop="21dp"
+                android:layout_marginTop="30dp"
                 android:fontFamily="@font/poppins_bold"
                 android:text="@string/profil"
                 android:textColor="@android:color/white"
@@ -91,7 +89,7 @@
                 app:layout_constraintTop_toTopOf="parent">
 
                 <de.hdodenhof.circleimageview.CircleImageView
-                    android:id="@+id/prof_pic"
+                    android:id="@+id/prof_pic_profile"
                     android:layout_width="70dp"
                     android:layout_height="70dp"
                     android:layout_marginLeft="35dp"
@@ -100,55 +98,50 @@
                     android:src="@drawable/example_prof_pic" />
 
                 <TextView
-                    android:id="@+id/Prof_name"
+                    android:id="@+id/prof_name_profile"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
                     android:layout_marginTop="23dp"
-                    android:layout_toRightOf="@id/prof_pic"
+                    android:layout_toRightOf="@id/prof_pic_profile"
                     android:fontFamily="@font/poppins_bold"
                     android:text="John Baker"
                     android:textColor="@color/colorOption"
-                    android:textSize="27sp" />
+                    android:textSize="27sp"
+                    android:autoSizeTextType="uniform"
+                    android:autoSizeMinTextSize="20sp"
+                    android:autoSizeMaxTextSize="27sp"/>
 
                 <TextView
-                    android:id="@+id/No_Identitas"
+                    android:id="@+id/no_identitas_profile"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10.5dp"
                     android:layout_marginTop="58dp"
-                    android:layout_toRightOf="@id/prof_pic"
+                    android:layout_toRightOf="@id/prof_pic_profile"
                     android:fontFamily="@font/poppins_bold"
                     android:text="352098000000002"
                     android:textColor="@android:color/darker_gray"
-                    android:textSize="16sp" />
+                    android:textSize="16sp"
+                    android:autoSizeTextType="uniform"
+                    android:autoSizeMinTextSize="12sp"
+                    android:autoSizeMaxTextSize="16sp"/>
 
-                <TextView
-                    android:id="@+id/usia"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="10.5dp"
-                    android:layout_marginTop="78dp"
-                    android:layout_toRightOf="@id/prof_pic"
-                    android:fontFamily="@font/poppins_medium"
-                    android:text="20 Tahun"
-                    android:textColor="@android:color/black"
-                    android:textSize="15sp" />
 
                 <ImageView
                     android:id="@+id/QRCode"
                     android:layout_width="100dp"
                     android:layout_height="100dp"
-                    android:layout_alignLeft="@id/usia"
-                    android:layout_marginLeft="60dp"
+                    android:layout_marginLeft="50dp"
                     android:layout_marginTop="110dp"
+                    android:layout_toRightOf="@id/button_edit_profile"
                     android:src="@drawable/qrcode"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
-                    android:id="@+id/button"
+                    android:id="@+id/button_edit_profile"
                     android:layout_width="110dp"
                     android:layout_height="25dp"
                     android:layout_marginLeft="30dp"
@@ -159,7 +152,8 @@
                     android:text="\t\t Edit Profile"
                     android:textAllCaps="false"
                     android:textColor="@android:color/white"
-                    android:textSize="11sp" />
+                    android:textSize="11sp"
+                    android:onClick="onClickEditProfile"/>
 
                 <ImageView
                     android:id="@+id/edit"
@@ -170,7 +164,7 @@
                     android:src="@drawable/pencil" />
 
                 <TextView
-                    android:id="@+id/logout"
+                    android:id="@+id/logout_profile"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="35dp"
@@ -259,7 +253,7 @@
                         android:textSize="18sp" />
 
                     <TextView
-                        android:id="@+id/selengkapnya1"
+                        android:id="@+id/detail_transaksi_1"
                         android:layout_width="130dp"
                         android:layout_height="25dp"
                         android:layout_marginLeft="160dp"
@@ -321,7 +315,7 @@
                         android:textSize="18sp" />
 
                     <TextView
-                        android:id="@+id/selengkapnya2"
+                        android:id="@+id/detail_transaksi_2"
                         android:layout_width="130dp"
                         android:layout_height="25dp"
                         android:layout_marginLeft="160dp"
@@ -383,7 +377,7 @@
                         android:textSize="18sp" />
 
                     <TextView
-                        android:id="@+id/selengkapnya3"
+                        android:id="@+id/detail_transaksi_3"
                         android:layout_width="130dp"
                         android:layout_height="25dp"
                         android:layout_marginLeft="160dp"
@@ -445,7 +439,7 @@
                         android:textSize="18sp" />
 
                     <TextView
-                        android:id="@+id/selengkapnya4"
+                        android:id="@+id/detail_transaksi_4"
                         android:layout_width="130dp"
                         android:layout_height="25dp"
                         android:layout_marginLeft="160dp"
@@ -507,7 +501,7 @@
                         android:textSize="18sp" />
 
                     <TextView
-                        android:id="@+id/selengkapnya5"
+                        android:id="@+id/detail_transaksi_5"
                         android:layout_width="130dp"
                         android:layout_height="25dp"
                         android:layout_marginLeft="160dp"
@@ -548,6 +542,7 @@
         app:layout_constraintTop_toTopOf="@+id/bg_btn_rounded">
 
         <ImageView
+            android:id="@+id/home_icon_button_profile"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="60dp"
@@ -555,9 +550,11 @@
             android:layout_marginTop="20dp"
             android:layout_marginEnd="30dp"
             android:layout_marginRight="30dp"
+            android:onClick="onClickHome"
             android:src="@drawable/ic_home_icon" />
 
         <ImageView
+            android:id="@+id/middle_icon_button_profile"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="30dp"
@@ -567,7 +564,9 @@
             android:layout_marginRight="30dp"
             android:src="@drawable/ic_booking_icon" />
 
+
         <ImageView
+            android:id="@+id/profile_icon_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="30dp"
@@ -575,7 +574,6 @@
             android:layout_marginTop="20dp"
             android:layout_marginEnd="60dp"
             android:layout_marginRight="60dp"
-            android:onClick="onClickBooking"
             android:src="@drawable/ic_profile_icon" />
 
     </LinearLayout>

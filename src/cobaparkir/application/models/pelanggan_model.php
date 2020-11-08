@@ -25,6 +25,8 @@ class pelanggan_model extends CI_Model {
             
         ];
         $this->db->insert('pelanggan', $data);
+        return $this->db->affected_rows();
+        
     }
 
     public function hapusDataPelanggan($id)
