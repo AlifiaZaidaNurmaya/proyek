@@ -38,6 +38,17 @@ class booking_model extends CI_Model {
         
         return $this->db->get()->row_array();
     }
+    
+    public function getBookingByHurufAcak($hurufAcak)
+    {
+        $this->db->select('id_booking,b.id_pelanggan,nama,nomor_plat,no_identitas,jam_booking,b.id_parkir,no_parkir');
+        $this->db->from('booking b');
+        $this->db->join('pelanggan p', 'b.id_pelanggan = p.id_pelanggan');
+        $this->db->join('tempat_parkir tp', 'b.id_parkir = tp.id_parkir');
+        $this->db->where('p.huruf_acak', $hurufAcak);
+        
+        return $this->db->get()->row_array();
+    }
 
     public function editDataBooking()
     {

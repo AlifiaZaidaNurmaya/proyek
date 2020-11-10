@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_height="match_parent"
     android:layout_width="match_parent"
     android:fillViewport="true">
 
-    <androidx.constraintlayout.widget.ConstraintLayout xmlns:app="http://schemas.android.com/apk/res-auto"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         tools:context=".SignUpActivity">
@@ -85,14 +86,14 @@
             android:textColorHint="#000000"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"/>
+            app:layout_constraintTop_toTopOf="parent" />
 
         <EditText
-            android:id="@+id/input_email"
+            android:id="@+id/input_email_profile"
             android:layout_width="260dp"
             android:layout_height="50dp"
             android:layout_gravity="center"
-            android:layout_marginTop="255dp"
+            android:layout_marginTop="5dp"
             android:background="@drawable/bg_input"
             android:hint="@string/email"
             android:inputType="textEmailAddress"
@@ -101,14 +102,14 @@
             android:textColorHint="#000000"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"/>
+            app:layout_constraintTop_toBottomOf="@+id/input_nama_edit_profile" />
 
         <EditText
-            android:id="@+id/input_pw"
+            android:id="@+id/input_pw_profile"
             android:layout_width="260dp"
             android:layout_height="50dp"
             android:layout_gravity="center"
-            android:layout_marginTop="308dp"
+            android:layout_marginTop="3dp"
             android:background="@drawable/bg_input"
             android:hint="@string/pw"
             android:inputType="textPassword"
@@ -117,14 +118,14 @@
             android:textColorHint="#000000"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"/>
+            app:layout_constraintTop_toBottomOf="@+id/input_email_profile" />
 
         <EditText
-            android:id="@+id/input_no_id"
+            android:id="@+id/input_no_id_profile"
             android:layout_width="260dp"
             android:layout_height="50dp"
             android:layout_gravity="center"
-            android:layout_marginTop="362dp"
+            android:layout_marginTop="4dp"
             android:background="@drawable/bg_input"
             android:hint="@string/no_identitas"
             android:inputType="number"
@@ -133,14 +134,14 @@
             android:textColorHint="#000000"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"/>
+            app:layout_constraintTop_toBottomOf="@+id/input_pw_profile" />
 
         <EditText
-            android:id="@+id/no_telp"
+            android:id="@+id/no_telp_profile"
             android:layout_width="260dp"
             android:layout_height="50dp"
             android:layout_gravity="center"
-            android:layout_marginTop="417dp"
+            android:layout_marginTop="6dp"
             android:background="@drawable/bg_input"
             android:hint="@string/no_telepon"
             android:inputType="number"
@@ -149,14 +150,14 @@
             android:textColorHint="#000000"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"/>
+            app:layout_constraintTop_toBottomOf="@+id/input_no_id_profile" />
 
         <EditText
-            android:id="@+id/alamat"
+            android:id="@+id/alamat_profile"
             android:layout_width="260dp"
             android:layout_height="50dp"
             android:layout_gravity="center"
-            android:layout_marginTop="470dp"
+            android:layout_marginTop="2dp"
             android:background="@drawable/bg_input"
             android:hint="@string/alamat"
             android:inputType="text|textMultiLine"
@@ -165,14 +166,14 @@
             android:textColorHint="#000000"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"/>
+            app:layout_constraintTop_toBottomOf="@+id/no_telp_profile" />
 
         <EditText
-            android:id="@+id/no_plat"
+            android:id="@+id/no_plat_profile"
             android:layout_width="260dp"
             android:layout_height="50dp"
             android:layout_gravity="center"
-            android:layout_marginTop="525dp"
+            android:layout_marginTop="5dp"
             android:background="@drawable/bg_input"
             android:hint="@string/no_plat"
             android:inputType="text"
@@ -181,7 +182,7 @@
             android:textColorHint="#000000"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"/>
+            app:layout_constraintTop_toBottomOf="@+id/alamat_profile" />
 
         <TextView
             android:id="@+id/cancel_edit"

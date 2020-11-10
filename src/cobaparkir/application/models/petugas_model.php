@@ -46,9 +46,18 @@ class petugas_model extends CI_Model {
         $this->db->update('petugas', $data);
     }
 
-    public function UpdatePetugas($data, $id_pengguna)
+    public function UpdatePetugas($id)
     {
-        $this->db->update('petugas', $data, ['id_petugas' => $id_pengguna]);
+        $data = [
+            'nama' => $this->input->post('nama'),
+            'password' => $this->input->post('password'),
+            'alamat' => $this->input->post('alamat'),
+            'nomor_telepon' => $this->input->post('nomor_telepon'),
+            'email' => $this->input->post('email')
+        ];
+
+        $this->db->where('id_petugas', $id);
+        $this->db->update('petugas', $data);
         return $this->db->affected_rows();
     }
 

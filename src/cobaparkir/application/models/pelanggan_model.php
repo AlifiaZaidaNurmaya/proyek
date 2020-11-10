@@ -57,9 +57,21 @@ class pelanggan_model extends CI_Model {
         $this->db->update('pelanggan', $data);
     }
     
-    public function UpdatePelanggan($data, $id_pelanggan)
+    public function UpdatePelanggan($id)
     {
-        $this->db->update('pelanggan', $data, ['id_pelanggan' => $id_pelanggan]);
+        $data = [
+            'nama' => $this->input->post('nama'),
+            'password' => $this->input->post('password'),
+            'alamat' => $this->input->post('alamat'),
+            'nomor_plat' => $this->input->post('nomor_plat'),
+            'nomor_telepon' => $this->input->post('nomor_telepon'),
+            'no_identitas' => $this->input->post('no_identitas'),
+            'email' => $this->input->post('email'),
+            'huruf_acak' => $this->input->post('huruf_acak')
+        ];
+
+        $this->db->where('id_pelanggan', $id);
+        $this->db->update('pelanggan', $data);
         return $this->db->affected_rows();
     }
 

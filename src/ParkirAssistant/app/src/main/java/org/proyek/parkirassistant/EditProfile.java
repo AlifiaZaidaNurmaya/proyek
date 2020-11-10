@@ -27,12 +27,18 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.Objects;
+import java.util.Random;
 
 public class EditProfile extends AppCompatActivity {
 
     EditText input_nama, input_email, input_pw, input_no_id, no_telp, alamat1, no_plat;
     TextView btn_confirm;
     ProgressDialog progressDialog;
+
+    String nama, email, password, no_identitas, nomor_telepon, alamat, nomor_plat;
+    String role;
+    String hurufAcak;
+    int idPengguna;
 
     SharedPrefManager shared;
 
@@ -45,38 +51,62 @@ public class EditProfile extends AppCompatActivity {
 
         AndroidNetworking.initialize(this);
 //        id_pg = (EditText) findViewById(R.id.id_pg);
-        input_nama = (EditText) findViewById(R.id.input_nama);
-        input_email = (EditText) findViewById(R.id.input_email);
-        input_pw = (EditText) findViewById(R.id.input_pw);
-        input_no_id = (EditText) findViewById(R.id.input_no_id);
-        no_telp = (EditText) findViewById(R.id.no_telp);
-        alamat1 = (EditText) findViewById(R.id.alamat1);
-        no_plat = (EditText) findViewById(R.id.no_plat);
+        input_nama = (EditText) findViewById(R.id.input_nama_edit_profile);
+        input_email = (EditText) findViewById(R.id.input_email_profile);
+        input_pw = (EditText) findViewById(R.id.input_pw_profile);
+        input_no_id = (EditText) findViewById(R.id.input_no_id_profile);
+        no_telp = (EditText) findViewById(R.id.no_telp_profile);
+        alamat1 = (EditText) findViewById(R.id.alamat_profile);
+        no_plat = (EditText) findViewById(R.id.no_plat_profile);
         btn_confirm = (TextView) findViewById(R.id.btn_confirm);
         progressDialog = new ProgressDialog(EditProfile.this);
+
+
+        if(shared.getSPStatus()){
+            input_nama.setText(shared.getSPNama());
+            input_email.setText(shared.getSPEmail());
+            input_pw.setText(shared.getSPPassword());
+            input_no_id.setText(String.valueOf(shared.getSPNoIdentitas()));
+            no_telp.setText(String.valueOf(shared.getSPNomorTelepon()));
+            alamat1.setText(shared.getSPAlamat());
+            no_plat.setText(shared.getSPNomorPlat());
+
+            idPengguna = shared.getSPIdPengguna();
+            role = shared.getSPRole();
+            hurufAcak = shared.getSPHurufAcak();
+
+        }
+
+        if(role.equals("petugas")){
+            input_no_id.setVisibility(View.GONE);
+            no_plat.setVisibility(View.GONE);
+        }
+
+
 
         btn_confirm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
 //                String id_pelanggan = id_pg.getText().toString();
-                String nama = input_nama.getText().toString();
-                String email = input_email.getText().toString();
-                String password = input_pw.getText().toString();
-                String no_identitas = input_no_id.getText().toString();
-                String nomor_telepon = no_telp.getText().toString();
-                String alamat = alamat1.getText().toString();
-                String nomor_plat = no_plat.getText().toString();
+                nama = input_nama.getText().toString();
+                email = input_email.getText().toString();
+                password = input_pw.getText().toString();
+                no_identitas = input_no_id.getText().toString();
+                nomor_telepon = no_telp.getText().toString();
+                alamat = alamat1.getText().toString();
+                nomor_plat = no_plat.getText().toString();
 
                 checkUpdate( nama, email, password, no_identitas, nomor_telepon, alamat, nomor_plat);
             }
         });
+
     }
 
     private void checkUpdate( String input_nama, String input_email, String input_pw, String input_no_id, String no_telp, String alamat1, String no_plat) {
         if (checkNetworkConnection()) {
             AndroidNetworking.post(DBContract.SERVER_UPDATE_URL)
-                    .addBodyParameter("id_pelanggan", SharedPrefManager.SP_ID_PENGGUNA)
+                    .addBodyParameter("id_pengguna", String.valueOf(idPengguna))
                     .addBodyParameter("nama", input_nama)
                     .addBodyParameter("email", input_email)
                     .addBodyParameter("password", input_pw)
@@ -84,7 +114,7 @@ public class EditProfile extends AppCompatActivity {
                     .addBodyParameter("nomor_telepon", no_telp)
                     .addBodyParameter("alamat", alamat1)
                     .addBodyParameter("nomor_plat", no_plat)
-                    .addBodyParameter("huruf_acak", "gdhd")
+                    .addBodyParameter("huruf_acak", hurufAcak)
                     .addHeaders("Content-Type", "application/json")
                     .setTag("Update Data")
                     .setPriority(Priority.MEDIUM)
@@ -95,66 +125,32 @@ public class EditProfile extends AppCompatActivity {
                             try {
                                 boolean status = response.getBoolean("status");
                                 String message = response.getString("message");
-                                String role = response.getString("role");
-                                int idPengguna = 0;
-                                String em = "";
-                                String nama = "";
-                                String username = "";
-                                String pass = "";
-                                String plat = "";
-                                String alamat = "";
-                                String hurufAcak = "";
-                                int noIdentitas = 0;
-                                int noTelp = 0;
+
 
                                 if (status) {
-                                    JSONArray jsonArray = response.getJSONArray("data");
-                                    for (int i = 0; i < jsonArray.length(); i++) {
-                                        JSONObject data = jsonArray.getJSONObject(i);
-
-                                        if(role.equalsIgnoreCase("pelanggan")){
-                                            idPengguna = data.getInt("id_pelanggan");
-                                            em = data.getString("email");
-                                            username = data.getString("username");
-                                            pass = data.getString("password");
-                                            nama = data.getString("nama");
-                                            alamat = data.getString("alamat");
-                                            plat = data.getString("nomor_plat");
-                                            noIdentitas = data.getInt("no_identitas");
-                                            noTelp = data.getInt("nomor_telepon");
-                                            hurufAcak = data.getString("huruf_acak");
-                                        }else if(role.equalsIgnoreCase("petugas")){
-                                            idPengguna = data.getInt("id_petugas");
-                                            em = data.getString("email");
-                                            username = data.getString("username");
-                                            pass = data.getString("password");
-                                            nama = data.getString("nama");
-                                            alamat = data.getString("alamat");
-                                            noTelp = data.getInt("nomor_telepon");
-                                        }
-                                    }
 
                                     shared.saveSPBoolean(SharedPrefManager.SP_STATUS, status);
                                     shared.saveSPString(SharedPrefManager.SP_ROLE, role);
 
                                     shared.saveSPInt(SharedPrefManager.SP_ID_PENGGUNA, idPengguna);
-                                    shared.saveSPString(SharedPrefManager.SP_EMAIL, em);
-                                    shared.saveSPString(SharedPrefManager.SP_USERNAME, username);
-                                    shared.saveSPString(SharedPrefManager.SP_PASSWORD, pass);
+                                    shared.saveSPString(SharedPrefManager.SP_EMAIL, email);
+//                                    shared.saveSPString(SharedPrefManager.SP_USERNAME, username);
+                                    shared.saveSPString(SharedPrefManager.SP_PASSWORD, password);
                                     shared.saveSPString(SharedPrefManager.SP_NAMA, nama);
                                     shared.saveSPString(SharedPrefManager.SP_ALAMAT, alamat);
                                     shared.saveSPString(SharedPrefManager.SP_HURUF_ACAK, hurufAcak);
-                                    shared.saveSPString(SharedPrefManager.SP_PLAT_NOMOR, plat);
-                                    shared.saveSPInt(SharedPrefManager.SP_NO_IDENTITAS, noIdentitas);
-                                    shared.saveSPInt(SharedPrefManager.SP_NOMOR_TELEPON, noTelp);
+                                    shared.saveSPString(SharedPrefManager.SP_PLAT_NOMOR, nomor_plat);
+                                    shared.saveSPInt(SharedPrefManager.SP_NO_IDENTITAS, Integer.parseInt(no_identitas));
+                                    shared.saveSPInt(SharedPrefManager.SP_NOMOR_TELEPON, Integer.parseInt(nomor_telepon));
 
 
-                                    Toast.makeText(getApplicationContext(), "Edit Profile Success", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
                                     Intent intenEdit = new Intent(getApplicationContext(), ProfileActivity.class);
                                     startActivity(intenEdit);
                                     finish();
                                 } else {
                                     Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
+                                    Log.d("message", Objects.requireNonNull(message));
                                 }
                             } catch (JSONException e) {
                                 Log.d("localizedMessage", Objects.requireNonNull(e.getLocalizedMessage()));

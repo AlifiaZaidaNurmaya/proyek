@@ -97,7 +97,7 @@
                     android:layout_marginTop="20dp"
                     android:layout_marginRight="20dp"
                     android:layout_marginEnd="20dp"
-                    android:src="@drawable/example_prof_pic" />
+                    android:backgroundTint="@android:color/black"/>
 
                 <TextView
                     android:id="@+id/prof_name_profile"

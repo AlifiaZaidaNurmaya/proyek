@@ -55,16 +55,7 @@ public class ProfileActivity extends AppCompatActivity {
             scrollView.setVisibility(View.VISIBLE);
             linearLayout.setVisibility(View.GONE);
 
-            String text= shared.getSPHurufAcak(); // Whatever you need to encode in the QR code
-            MultiFormatWriter multiFormatWriter = new MultiFormatWriter();
-            try {
-                BitMatrix bitMatrix = multiFormatWriter.encode(text, BarcodeFormat.QR_CODE,200,200);
-                BarcodeEncoder barcodeEncoder = new BarcodeEncoder();
-                Bitmap bitmap = barcodeEncoder.createBitmap(bitMatrix);
-                qrCode.setImageBitmap(bitmap);
-            } catch (WriterException e) {
-                e.printStackTrace();
-            }
+
 
 
             if (shared.getSPRole().equals("petugas")) {
@@ -84,8 +75,18 @@ public class ProfileActivity extends AppCompatActivity {
 
             } else if (shared.getSPRole().equals("pelanggan")) {
                 middleButton.setImageResource(R.drawable.ic_booking_icon);
-                noIdentitasProfile.setText(Integer.toString(shared.getSPNoIdentitas()));
+                noIdentitasProfile.setText(String.valueOf(shared.getSPNoIdentitas()));
 
+                String text= shared.getSPHurufAcak(); // Whatever you need to encode in the QR code
+                MultiFormatWriter multiFormatWriter = new MultiFormatWriter();
+                try {
+                    BitMatrix bitMatrix = multiFormatWriter.encode(text, BarcodeFormat.QR_CODE,200,200);
+                    BarcodeEncoder barcodeEncoder = new BarcodeEncoder();
+                    Bitmap bitmap = barcodeEncoder.createBitmap(bitMatrix);
+                    qrCode.setImageBitmap(bitmap);
+                } catch (WriterException e) {
+                    e.printStackTrace();
+                }
 
 
                 middleButton.setOnClickListener(new View.OnClickListener() {
