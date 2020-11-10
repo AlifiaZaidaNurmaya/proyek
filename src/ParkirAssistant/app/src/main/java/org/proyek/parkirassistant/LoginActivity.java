@@ -22,11 +22,13 @@ import com.androidnetworking.interfaces.JSONObjectRequestListener;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.proyek.parkirassistant.util.SharedPrefManager;
 
 import java.util.Objects;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+/* Sebelum melakukan login, cek DBContract terlebih dahulu
+* */
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -88,6 +90,7 @@ public class LoginActivity extends AppCompatActivity {
                             try {
                                 boolean status = response.getBoolean("status");
                                 String role = response.getString("role");
+                                int idPengguna = 0;
                                 String em = "";
                                 String nama = "";
                                 String username = "";
@@ -104,6 +107,7 @@ public class LoginActivity extends AppCompatActivity {
                                         JSONObject data = jsonArray.getJSONObject(i);
 
                                         if(role.equalsIgnoreCase("pelanggan")){
+                                            idPengguna = data.getInt("id_pelanggan");
                                             em = data.getString("email");
                                             username = data.getString("username");
                                             pass = data.getString("password");
@@ -114,6 +118,7 @@ public class LoginActivity extends AppCompatActivity {
                                             noTelp = data.getInt("nomor_telepon");
                                             hurufAcak = data.getString("huruf_acak");
                                         }else if(role.equalsIgnoreCase("petugas")){
+                                            idPengguna = data.getInt("id_petugas");
                                             em = data.getString("email");
                                             username = data.getString("username");
                                             pass = data.getString("password");
@@ -126,6 +131,7 @@ public class LoginActivity extends AppCompatActivity {
                                     shared.saveSPBoolean(SharedPrefManager.SP_STATUS, status);
                                     shared.saveSPString(SharedPrefManager.SP_ROLE, role);
 
+                                    shared.saveSPInt(SharedPrefManager.SP_ID_PENGGUNA, idPengguna);
                                     shared.saveSPString(SharedPrefManager.SP_EMAIL, em);
                                     shared.saveSPString(SharedPrefManager.SP_USERNAME, username);
                                     shared.saveSPString(SharedPrefManager.SP_PASSWORD, pass);

@@ -50,7 +50,7 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            tools:context=".Profil">
+            tools:context=".ProfileActivity">
 
             <ImageView
                 android:id="@+id/header"
@@ -93,8 +93,10 @@
                     android:layout_width="70dp"
                     android:layout_height="70dp"
                     android:layout_marginLeft="35dp"
+                    android:layout_marginStart="35dp"
                     android:layout_marginTop="20dp"
                     android:layout_marginRight="20dp"
+                    android:layout_marginEnd="20dp"
                     android:src="@drawable/example_prof_pic" />
 
                 <TextView
@@ -102,15 +104,14 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
+                    android:layout_marginStart="10dp"
                     android:layout_marginTop="23dp"
                     android:layout_toRightOf="@id/prof_pic_profile"
+                    android:layout_toEndOf="@id/prof_pic_profile"
                     android:fontFamily="@font/poppins_bold"
                     android:text="John Baker"
                     android:textColor="@color/colorOption"
-                    android:textSize="27sp"
-                    android:autoSizeTextType="uniform"
-                    android:autoSizeMinTextSize="20sp"
-                    android:autoSizeMaxTextSize="27sp"/>
+                    android:textSize="27sp"/>
 
                 <TextView
                     android:id="@+id/no_identitas_profile"
@@ -122,20 +123,17 @@
                     android:fontFamily="@font/poppins_bold"
                     android:text="352098000000002"
                     android:textColor="@android:color/darker_gray"
-                    android:textSize="16sp"
-                    android:autoSizeTextType="uniform"
-                    android:autoSizeMinTextSize="12sp"
-                    android:autoSizeMaxTextSize="16sp"/>
+                    android:textSize="16sp"/>
 
 
                 <ImageView
                     android:id="@+id/QRCode"
-                    android:layout_width="100dp"
-                    android:layout_height="100dp"
-                    android:layout_marginLeft="50dp"
+                    android:layout_width="90dp"
+                    android:layout_height="90dp"
+                    android:layout_marginLeft="60dp"
+                    android:layout_marginStart="60dp"
                     android:layout_marginTop="110dp"
                     android:layout_toRightOf="@id/button_edit_profile"
-                    android:src="@drawable/qrcode"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -145,14 +143,17 @@
                     android:layout_width="110dp"
                     android:layout_height="25dp"
                     android:layout_marginLeft="30dp"
-                    android:layout_marginTop="160dp"
+                    android:layout_marginStart="30dp"
+                    android:paddingLeft="20dp"
+                    android:paddingStart="20dp"
+                    android:layout_marginTop="140dp"
                     android:background="@drawable/bg_btn_login"
                     android:fontFamily="@font/poppins_bold"
                     android:gravity="center"
-                    android:text="\t\t Edit Profile"
+                    android:text="Edit Profile"
                     android:textAllCaps="false"
                     android:textColor="@android:color/white"
-                    android:textSize="11sp"
+                    android:textSize="12sp"
                     android:onClick="onClickEditProfile"/>
 
                 <ImageView
@@ -160,7 +161,8 @@
                     android:layout_width="15dp"
                     android:layout_height="15dp"
                     android:layout_marginLeft="40dp"
-                    android:layout_marginTop="165dp"
+                    android:layout_marginStart="40dp"
+                    android:layout_marginTop="145dp"
                     android:src="@drawable/pencil" />
 
                 <TextView
@@ -168,13 +170,13 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="35dp"
+                    android:layout_marginStart="35dp"
                     android:layout_marginTop="190dp"
                     android:fontFamily="@font/poppins_bold"
                     android:gravity="center"
                     android:text="Logout"
-                    android:textAllCaps="false"
                     android:textColor="@android:color/holo_orange_dark"
-                    android:textSize="11sp" />
+                    android:textSize="12sp" />
 
             </RelativeLayout>
 

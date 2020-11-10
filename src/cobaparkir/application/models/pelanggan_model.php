@@ -56,6 +56,12 @@ class pelanggan_model extends CI_Model {
         $this->db->where('id_pelanggan', $this->input->post('id_pelanggan'));
         $this->db->update('pelanggan', $data);
     }
+    
+    public function UpdatePelanggan($data, $id_pelanggan)
+    {
+        $this->db->update('pelanggan', $data, ['id_pelanggan' => $id_pelanggan]);
+        return $this->db->affected_rows();
+    }
 
     public function cariDataPelanggan()
     {

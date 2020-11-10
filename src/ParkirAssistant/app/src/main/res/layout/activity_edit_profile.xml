@@ -72,7 +72,7 @@
 
 
         <EditText
-            android:id="@+id/input_nama"
+            android:id="@+id/input_nama_edit_profile"
             android:layout_width="260dp"
             android:layout_height="50dp"
             android:layout_gravity="center"

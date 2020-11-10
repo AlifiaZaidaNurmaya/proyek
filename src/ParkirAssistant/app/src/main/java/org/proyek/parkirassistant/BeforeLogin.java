@@ -4,8 +4,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
-import org.proyek.parkirassistant.util.SharedPrefManager;
-
 import androidx.appcompat.app.AppCompatActivity;
 
 public class BeforeLogin extends AppCompatActivity {

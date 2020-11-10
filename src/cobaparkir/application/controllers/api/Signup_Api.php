@@ -3,6 +3,7 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 use chriskacerguis\RestServer\RestController;
+use chriskacerguis\RestServer\Format;
 
 class Signup_Api extends RestController {
 

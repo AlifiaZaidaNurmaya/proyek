@@ -46,6 +46,13 @@ class petugas_model extends CI_Model {
         $this->db->update('petugas', $data);
     }
 
+    public function UpdatePetugas($data, $id_pengguna)
+    {
+        $this->db->update('petugas', $data, ['id_petugas' => $id_pengguna]);
+        return $this->db->affected_rows();
+    }
+
+
     public function cariDataPetugas()
     {
         $keyword = $this->input->post('keyword');

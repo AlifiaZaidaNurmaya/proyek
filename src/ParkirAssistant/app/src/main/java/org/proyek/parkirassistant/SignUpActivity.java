@@ -24,6 +24,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.Objects;
+import java.util.Random;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -32,6 +33,8 @@ public class SignUpActivity extends AppCompatActivity {
     EditText input_nama, input_email, input_pw, input_no_id, no_telp, alamat1, no_plat;
     TextView btn_signUp, login;
     ProgressDialog progressDialog;
+
+    String randomCharacters = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,12 +72,25 @@ public class SignUpActivity extends AppCompatActivity {
                 String alamat = alamat1.getText().toString();
                 String nomor_plat = no_plat.getText().toString();
 
-                CheckSignup(nama, email, password, no_identitas, nomor_telepon, alamat, nomor_plat);
+                String hurufAcak = generateRandomCharacters();
+
+                CheckSignup(nama, email, password, no_identitas, nomor_telepon, alamat, nomor_plat, hurufAcak);
             }
         });
     }
 
-    private void CheckSignup(String input_nama, String input_email, String input_pw, String input_no_id, String no_telp, String alamat1, String no_plat) {
+    private String generateRandomCharacters(){
+        Random random = new Random();
+
+        String characters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
+        for (int i = 0; i < 4; i++) {
+            char huruf = characters.charAt(random.nextInt(characters.length()));
+            randomCharacters += huruf;
+        }
+        return randomCharacters;
+    }
+
+    private void CheckSignup(String input_nama, String input_email, String input_pw, String input_no_id, String no_telp, String alamat1, String no_plat, String hurufAcak) {
         if (checkNetworkConnection()) {
             AndroidNetworking.post(DBContract.SERVER_SIGNUP_URL)
                     .addBodyParameter("nama", input_nama)
@@ -84,7 +100,7 @@ public class SignUpActivity extends AppCompatActivity {
                     .addBodyParameter("nomor_telepon", no_telp)
                     .addBodyParameter("alamat", alamat1)
                     .addBodyParameter("nomor_plat", no_plat)
-                    .addBodyParameter("huruf_acak", "gdhd")
+                    .addBodyParameter("huruf_acak", hurufAcak)
                     .addHeaders("Content-Type", "application/json")
                     .setTag("test")
                     .setPriority(Priority.MEDIUM)

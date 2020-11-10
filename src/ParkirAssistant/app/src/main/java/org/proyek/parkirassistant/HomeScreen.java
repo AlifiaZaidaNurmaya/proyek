@@ -1,27 +1,15 @@
 package org.proyek.parkirassistant;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.content.res.AppCompatResources;
 import androidx.constraintlayout.widget.ConstraintLayout;
-import androidx.core.graphics.drawable.DrawableCompat;
 
 import android.content.Intent;
-import android.graphics.Color;
-import android.graphics.drawable.Drawable;
-import android.media.Image;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
-import android.widget.ScrollView;
 import android.widget.TextView;
-
-import org.proyek.parkirassistant.util.SharedPrefManager;
-
-import java.util.Objects;
 
 public class HomeScreen extends AppCompatActivity {
 
@@ -160,7 +148,7 @@ public class HomeScreen extends AppCompatActivity {
     }
 
     public void onClickProfil(View view) {
-        Intent i = new Intent(this, Profil.class);
+        Intent i = new Intent(this, ProfileActivity.class);
         startActivity(i);
         finish();
     }

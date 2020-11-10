@@ -8,8 +8,6 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
 
-import org.proyek.parkirassistant.util.SharedPrefManager;
-
 import androidx.appcompat.app.AppCompatActivity;
 
 
@@ -67,7 +65,7 @@ public class BookingActivity extends AppCompatActivity {
     }
 
     public void onClickProfil(View view) {
-        Intent i = new Intent(this,Profil.class);
+        Intent i = new Intent(this, ProfileActivity.class);
         startActivity(i);
         finish();
     }
