@@ -2,6 +2,7 @@ package org.proyek.parkirassistant;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.net.ConnectivityManager;
 import android.net.Network;
 import android.net.NetworkCapabilities;
@@ -29,7 +30,7 @@ import org.json.JSONObject;
 import java.util.Objects;
 
 import androidx.appcompat.app.AppCompatActivity;
-
+import androidx.core.content.ContextCompat;
 
 
 public class BookingActivity extends AppCompatActivity {
@@ -40,11 +41,19 @@ public class BookingActivity extends AppCompatActivity {
     EditText inputNama;
     EditText inputNoIdentitas;
     EditText inputPlat;
+    EditText inputNoParkir;
 
     Button submitBtn;
 
+    Button[] box;
+
     ScrollView scrollView;
     LinearLayout linearLayout;
+
+    boolean status = false;
+    int []idParkir;
+    String []noParkir;
+    int []isBooked;
 
     SharedPrefManager shared;
     @Override
@@ -59,11 +68,41 @@ public class BookingActivity extends AppCompatActivity {
         inputNama = (EditText) findViewById(R.id.input_nama_booking);
         inputNoIdentitas = (EditText) findViewById(R.id.input_identitas_booking);
         inputPlat = (EditText) findViewById(R.id.input_plat_booking);
+        inputNoParkir = (EditText) findViewById(R.id.input_nomor_parkir_booking);
 
         submitBtn = (Button) findViewById(R.id.submit_button_booking);
 
         scrollView = (ScrollView) findViewById(R.id.scroll_layout_booking);
         linearLayout = (LinearLayout) findViewById(R.id.before_login_layout_booking);
+
+        idParkir = new int[20];
+        isBooked = new int[20];
+        noParkir = new String[20];
+
+        box = new Button[20];
+        box[0] = findViewById(R.id.parkir_1);
+        box[1] = findViewById(R.id.parkir_2);
+        box[2] = findViewById(R.id.parkir_3);
+        box[3] = findViewById(R.id.parkir_4);
+        box[4] = findViewById(R.id.parkir_5);
+        box[5] = findViewById(R.id.parkir_6);
+        box[6] = findViewById(R.id.parkir_7);
+        box[7] = findViewById(R.id.parkir_8);
+        box[8] = findViewById(R.id.parkir_9);
+        box[9] = findViewById(R.id.parkir_10);
+        box[10] = findViewById(R.id.parkir_11);
+        box[11] = findViewById(R.id.parkir_12);
+        box[12] = findViewById(R.id.parkir_13);
+        box[13] = findViewById(R.id.parkir_14);
+        box[14] = findViewById(R.id.parkir_15);
+        box[15] = findViewById(R.id.parkir_16);
+        box[16] = findViewById(R.id.parkir_17);
+        box[17] = findViewById(R.id.parkir_18);
+        box[18] = findViewById(R.id.parkir_19);
+        box[19] = findViewById(R.id.parkir_20);
+
+        // cek parkiran yang sudah dibooking (untuk ditampilkan dalam warna yang berbeda)
+        checkBookedParking();
 
 
         shared = new SharedPrefManager(getApplicationContext());
@@ -79,7 +118,6 @@ public class BookingActivity extends AppCompatActivity {
             submitBtn.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    checkBookingData();
                     insertBookingData();
                 }
             });
@@ -91,95 +129,69 @@ public class BookingActivity extends AppCompatActivity {
 
     }
 
+    // input data booking
     private void insertBookingData() {
+        if(checkNetworkConnection()){
+            AndroidNetworking.post(DBContract.SERVER_INSERT_BOOKING_URL)
+                    .addBodyParameter("id_pelanggan",SharedPrefManager.SP_ID_PENGGUNA)
+                    .addBodyParameter("no_parkir",inputNoParkir.getText().toString())
+                    .addBodyParameter("jam_booking",Long.toString(System.currentTimeMillis()))
+                    .addHeaders("Content-Type","application/json")
+                    .setTag("test input")
+                    .setPriority(Priority.HIGH)
+                    .build()
+                    .getAsJSONObject(new JSONObjectRequestListener() {
+                        @Override
+                        public void onResponse(JSONObject response) {
+                            
+                        }
 
+                        @Override
+                        public void onError(ANError anError) {
+
+                        }
+                    });
+        }else{
+            Toast.makeText(getApplicationContext(), "Tidak ada koneksi internet", Toast.LENGTH_SHORT).show();
+        }
     }
 
     // mengecek apakah pada booking sudah ada datanya.
-    private void checkBookingData() {
+    private void checkBookedParking() {
         if(checkNetworkConnection()){
-            String idPelanggan = String.valueOf(shared.getSPIdPengguna());
+//            String idPelanggan = String.valueOf(shared.getSPIdPengguna());
 
 
             AndroidNetworking.post(DBContract.SERVER_BOOKING_URL)
 //                    .addBodyParameter("email", email)
 //                    .addBodyParameter("password", password)
                     .addHeaders("Content-Type", "application/json")
-                    .setTag("test")
+                    .setTag("test booked")
                     .setPriority(Priority.MEDIUM)
                     .build()
                     .getAsJSONObject(new JSONObjectRequestListener() {
                         @Override
                         public void onResponse(JSONObject response) {
                             try {
-                                boolean status = response.getBoolean("status");
-                                String role = response.getString("role");
-                                int idPengguna = 0;
-                                String em = "";
-                                String nama = "";
-                                String username = "";
-                                String pass = "";
-                                String plat = "";
-                                String alamat = "";
-                                String hurufAcak = "";
-                                int noIdentitas = 0;
-                                int noTelp = 0;
+                                status = response.getBoolean("status");
 
                                 if (status) {
                                     JSONArray jsonArray = response.getJSONArray("data");
                                     for (int i = 0; i < jsonArray.length(); i++) {
                                         JSONObject data = jsonArray.getJSONObject(i);
 
-                                        if(role.equalsIgnoreCase("pelanggan")){
-                                            idPengguna = data.getInt("id_pelanggan");
-                                            em = data.getString("email");
-                                            username = data.getString("username");
-                                            pass = data.getString("password");
-                                            nama = data.getString("nama");
-                                            alamat = data.getString("alamat");
-                                            plat = data.getString("nomor_plat");
-                                            noIdentitas = data.getInt("no_identitas");
-                                            noTelp = data.getInt("nomor_telepon");
-                                            hurufAcak = data.getString("huruf_acak");
-                                        }else if(role.equalsIgnoreCase("petugas")){
-                                            idPengguna = data.getInt("id_petugas");
-                                            em = data.getString("email");
-                                            username = data.getString("username");
-                                            pass = data.getString("password");
-                                            nama = data.getString("nama");
-                                            alamat = data.getString("alamat");
-                                            noTelp = data.getInt("nomor_telepon");
+                                        idParkir[i] = data.getInt("id_parkir");
+                                        noParkir[i] = data.getString("no_parkir");
+                                        isBooked[i] = data.getInt("is_booked");
+                                        if((box[i].getText().toString()).equals(noParkir[i])){
+
+                                            if(isBooked[i] == 0){
+                                                box[i].setBackgroundColor(ContextCompat.getColor(getApplicationContext(),R.color.not_booked_color));
+                                            }else{
+                                                box[i].setBackgroundColor(ContextCompat.getColor(getApplicationContext(),R.color.booked_color));
+                                            }
                                         }
                                     }
-
-                                    shared.saveSPBoolean(SharedPrefManager.SP_STATUS, status);
-                                    shared.saveSPString(SharedPrefManager.SP_ROLE, role);
-
-                                    shared.saveSPInt(SharedPrefManager.SP_ID_PENGGUNA, idPengguna);
-                                    shared.saveSPString(SharedPrefManager.SP_EMAIL, em);
-                                    shared.saveSPString(SharedPrefManager.SP_USERNAME, username);
-                                    shared.saveSPString(SharedPrefManager.SP_PASSWORD, pass);
-                                    shared.saveSPString(SharedPrefManager.SP_NAMA, nama);
-                                    shared.saveSPString(SharedPrefManager.SP_ALAMAT, alamat);
-                                    shared.saveSPString(SharedPrefManager.SP_HURUF_ACAK, hurufAcak);
-                                    shared.saveSPString(SharedPrefManager.SP_PLAT_NOMOR, plat);
-                                    shared.saveSPInt(SharedPrefManager.SP_NO_IDENTITAS, noIdentitas);
-                                    shared.saveSPInt(SharedPrefManager.SP_NOMOR_TELEPON, noTelp);
-
-                                    Toast.makeText(getApplicationContext(), "Login sukses",
-                                            Toast.LENGTH_LONG).show();
-
-                                    if(role.equalsIgnoreCase("pelanggan")){
-                                        Toast.makeText(getApplicationContext(), "Selamat datang " + nama,
-                                                Toast.LENGTH_LONG).show();
-                                    }else{
-                                        Toast.makeText(getApplicationContext(), "Selamat datang petugas " + nama,
-                                                Toast.LENGTH_LONG).show();
-                                    }
-
-
-                                    Intent intentHome = new Intent(getApplicationContext(), HomeScreen.class);
-                                    startActivity(intentHome);
 
                                 } else {
                                     String message = response.getString("message");

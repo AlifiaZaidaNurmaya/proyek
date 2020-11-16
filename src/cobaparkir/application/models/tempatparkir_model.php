@@ -9,6 +9,14 @@ class tempatparkir_model extends CI_Model {
         
     }
 
+    public function getIDParkirByNoParkir($noParkir){
+        $this->db->select('id_parkir');
+        $this->db->from('tempat_parkir');
+        
+        $this->db->where('no_parkir',$noParkir);
+        
+    }
+
 }
 
 /* End of file tempatparkir_model.php */

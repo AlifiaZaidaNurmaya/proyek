@@ -20,4 +20,27 @@
     <string name="pindai_qr_code">Pindai QR Code</string>
     <string name="keterangan_penggunaan">Keterangan penggunaan</string>
 
+    <string-array name="no_parkir">
+        <item>1C</item>
+        <item>2C</item>
+        <item>3C</item>
+        <item>4C</item>
+        <item>5C</item>
+        <item>6C</item>
+        <item>7C</item>
+        <item>8C</item>
+        <item>9C</item>
+        <item>10C</item>
+        <item>11C</item>
+        <item>12C</item>
+        <item>1M</item>
+        <item>2M</item>
+        <item>3M</item>
+        <item>4M</item>
+        <item>5M</item>
+        <item>6M</item>
+        <item>7M</item>
+        <item>8M</item>
+    </string-array>
+
 </resources>

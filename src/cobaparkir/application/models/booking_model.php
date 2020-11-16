@@ -22,6 +22,17 @@ class booking_model extends CI_Model {
         $this->db->insert('booking', $data);
     }
 
+    public function inputBookingData(){
+        $data = [
+            "id_pelanggan" => $this->input->post('id_pelanggan', true),
+            "id_parkir" => $this->input->post('id_parkir', true),
+            "jam_booking" => $this->input->post('jam_booking', true)
+        ];
+        $this->db->insert('booking', $data);
+        return $this->db->affected_rows();
+        
+    }
+
     public function hapusDataBooking($id)
     {
         $this->db->where('id_booking', $id);

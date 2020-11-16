@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 01, 2020 at 09:33 AM
+-- Generation Time: Nov 16, 2020 at 09:15 AM
 -- Server version: 10.4.11-MariaDB
 -- PHP Version: 7.4.4
 
@@ -75,7 +75,7 @@ INSERT INTO `entry` (`id_entry`, `id_pelanggan`, `id_booking`, `jam_entry`, `har
 CREATE TABLE `pelanggan` (
   `id_pelanggan` int(100) NOT NULL,
   `nama` varchar(50) NOT NULL,
-  `username` varchar(50) NOT NULL,
+  `username` varchar(50) DEFAULT NULL,
   `password` varchar(30) NOT NULL,
   `alamat` varchar(50) DEFAULT NULL,
   `nomor_plat` varchar(10) NOT NULL,
@@ -91,8 +91,12 @@ CREATE TABLE `pelanggan` (
 
 INSERT INTO `pelanggan` (`id_pelanggan`, `nama`, `username`, `password`, `alamat`, `nomor_plat`, `nomor_telepon`, `no_identitas`, `email`, `huruf_acak`) VALUES
 (1, 'Hoyeh Da Vinci', 'hoyehdav', 'hoyeh', 'Jl. Batubara No. 20', 'H 474 R', 892348978, 2147483647, 'hoyeh.davinci@gmail.com', 'GCvW'),
-(3, 'Garit Franco', 'garitfra', 'garit', 'Jl. Raya No. 12', 'R 311 Y', 321782, 2147483647, 'garitf@gmail.com', 'kZVY'),
-(11, 'Andi', 'andi', 'andikeren69', 'Jl. Sudirman, Malang, Jawa Timur', 'N 123 N', 83000000, 12345, 'andimantap@gmail.com', '123');
+(3, 'Garit Franco', 'garitfra', 'garit', 'Jl. Raya No. 12', 'R 311 YV', 321782, 2147483647, 'garitfranco@gmail.com', 'kZVY'),
+(11, 'Andi', 'andi', 'andikeren69', 'Jl. Sudirman, Malang, Jawa Timur', 'N 123 N', 83000000, 12345, 'andimantap@gmail.com', '123'),
+(12, 'Joko Froyo', 'jokokoj', 'jokosamudro', 'Jl. Belimbing Wuluh No. 15', 'W 1123 XX', 87346723, 2147483647, 'jokosamudro@gmail.com', 'HaSs'),
+(13, 'Joko Winarno', 'jokokoj', 'joko123', 'Jl. Belimbing Starfruit No. 35', 'W 5409 VW', 87346723, 2147483647, 'joko@gmail.com', 'heWw'),
+(14, 'Joko Winarno', 'jokokoj', 'joko123', 'Jl. Belimbing Starfruit No. 35', 'W 5409 VW', 87346723, 2147483647, 'joko@gmail.com', 'heWw'),
+(15, 'Yusril', NULL, 'uhuy', 'JL. Landak', 'X 2345 VS', 87654321, 12345678, 'yusril@rocketmail.com', 'gdhd');
 
 -- --------------------------------------------------------
 
@@ -103,19 +107,19 @@ INSERT INTO `pelanggan` (`id_pelanggan`, `nama`, `username`, `password`, `alamat
 CREATE TABLE `petugas` (
   `id_petugas` int(10) NOT NULL,
   `nama` varchar(50) NOT NULL,
-  `username` varchar(30) NOT NULL,
+  `username` varchar(30) DEFAULT NULL,
   `email` varchar(30) NOT NULL,
   `password` varchar(25) NOT NULL,
-  `alamat` varchar(50) NOT NULL,
-  `no_telepon` int(15) NOT NULL
+  `alamat` varchar(50) DEFAULT NULL,
+  `nomor_telepon` int(15) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `petugas`
 --
 
-INSERT INTO `petugas` (`id_petugas`, `nama`, `username`, `email`, `password`, `alamat`, `no_telepon`) VALUES
-(90, 'Andi Mcuy', 'andim', 'andimcuy@gmail.com', '69andi69', 'Jl. Sudirman, Batu, Jawa Timur', 8999999);
+INSERT INTO `petugas` (`id_petugas`, `nama`, `username`, `email`, `password`, `alamat`, `nomor_telepon`) VALUES
+(90, 'Andi R', 'andim', 'andirahmat@gmail.com', 'andirahmat', 'Jl. Kawi Raya No. 30', 2147483647);
 
 -- --------------------------------------------------------
 
@@ -149,18 +153,35 @@ INSERT INTO `super_admin` (`id_admin`, `nama`, `username`, `password`, `email`, 
 
 CREATE TABLE `tempat_parkir` (
   `id_parkir` int(10) NOT NULL,
-  `no_parkir` varchar(10) DEFAULT NULL
+  `no_parkir` varchar(10) DEFAULT NULL,
+  `is_booked` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `tempat_parkir`
 --
 
-INSERT INTO `tempat_parkir` (`id_parkir`, `no_parkir`) VALUES
-(1, '1C'),
-(2, '2C'),
-(3, '3C'),
-(4, '4C');
+INSERT INTO `tempat_parkir` (`id_parkir`, `no_parkir`, `is_booked`) VALUES
+(1, '1C', 1),
+(2, '2C', 1),
+(3, '3C', 0),
+(4, '4C', 0),
+(5, '5C', 0),
+(6, '6C', 0),
+(7, '7C', 0),
+(8, '8C', 1),
+(9, '9C', 0),
+(10, '10C', 0),
+(11, '11C', 0),
+(12, '12C', 0),
+(13, '1M', 0),
+(14, '2M', 0),
+(15, '3M', 0),
+(16, '4M', 0),
+(17, '5M', 0),
+(18, '6M', 0),
+(19, '7M', 0),
+(20, '8M', 0);
 
 -- --------------------------------------------------------
 
@@ -172,10 +193,18 @@ CREATE TABLE `transaksi` (
   `id_transaksi` int(100) NOT NULL,
   `id_entry` int(100) NOT NULL,
   `jenis_transaksi` varchar(255) DEFAULT NULL,
-  `jam_checkOut` int(100) NOT NULL,
+  `jam_checkOut` time NOT NULL,
   `total` int(10) NOT NULL,
   `id_petugas` int(10) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `transaksi`
+--
+
+INSERT INTO `transaksi` (`id_transaksi`, `id_entry`, `jenis_transaksi`, `jam_checkOut`, `total`, `id_petugas`) VALUES
+(1, 667, 'e-wallet', '20:40:15', 10000, 90),
+(2, 667, 'e-wallet', '20:38:52', 2000, 90);
 
 --
 -- Indexes for dumped tables
@@ -250,7 +279,7 @@ ALTER TABLE `entry`
 -- AUTO_INCREMENT for table `pelanggan`
 --
 ALTER TABLE `pelanggan`
-  MODIFY `id_pelanggan` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id_pelanggan` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT for table `petugas`
@@ -268,7 +297,7 @@ ALTER TABLE `super_admin`
 -- AUTO_INCREMENT for table `tempat_parkir`
 --
 ALTER TABLE `tempat_parkir`
-  MODIFY `id_parkir` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id_parkir` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- AUTO_INCREMENT for table `transaksi`
