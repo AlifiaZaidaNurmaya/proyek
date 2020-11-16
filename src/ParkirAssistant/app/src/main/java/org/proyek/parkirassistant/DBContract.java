@@ -8,14 +8,13 @@ package org.proyek.parkirassistant;
 * Pastiin juga laptop sama hp kalian tersambung di satu jaringan (WiFi / hotspot yang sama). Itu salah satu syarat biar bisa akses database
 * XAMPP juga nyalain jangan lupa.*/
 
-// ip di kos yusril = 192.168.1.4
-// ip di vibes = 192.168.1.66
-// ip di rumah yusril = 192.168.100.5
 
 public class DBContract {
-    public static final String SERVER_LOGIN_URL = "http://192.168.1.4/cobaparkir/api/Login_Api/auth";
-    public static final String SERVER_SIGNUP_URL = "http://192.168.1.4/cobaparkir/api/Signup_Api/auth";
-    public static final String SERVER_UPDATE_URL = "http://192.168.1.4/cobaparkir/api/Updateprofile_Api/auth";
-    public static final String SERVER_BOOKING_URL = "http://192.168.1.4/cobaparkir/api/Booking_Api/cek";
-    public static final String SERVER_INSERT_BOOKING_URL = "http://192.168.1.4/cobaparkir/api/Booking_Api/input";
+    public static final String SERVER_LOGIN_URL = "http://192.168.1.2/cobaparkir/api/Login_Api/auth";
+    public static final String SERVER_SIGNUP_URL = "http://192.168.1.2/cobaparkir/api/Signup_Api/auth";
+    public static final String SERVER_UPDATE_URL = "http://192.168.1.2/cobaparkir/api/Updateprofile_Api/auth";
+    public static final String SERVER_BOOKING_URL = "http://192.168.1.2/cobaparkir/api/Booking_Api/cek";
+    public static final String SERVER_RIWAYAT_TRANSAKSI_URL = "http://192.168.1.2/cobaparkir/api/Transaksi_Api/riwayat";
+    public static final String SERVER_INSERT_BOOKING_URL = "http://192.168.1.2/cobaparkir/api/Booking_Api/input";
+
 }

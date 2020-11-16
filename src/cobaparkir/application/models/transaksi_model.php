@@ -42,6 +42,18 @@ class transaksi_model extends CI_Model {
         return $this->db->get()->row_array();
     }
 
+    public function getTransaksiByIDPelanggan($idPelanggan)
+    {
+        $this->db->select('*');
+        $this->db->from('transaksi t');
+        $this->db->join('entry e', 't.id_entry = e.id_entry');
+        $this->db->join('petugas pt', 't.id_petugas = pt.id_petugas');
+        $this->db->where('e.id_pelanggan', $idPelanggan);
+
+        return $this->db->get()->result_array();
+    }
+    
+
     public function editDataTransaksi()
     {
         $data = [
