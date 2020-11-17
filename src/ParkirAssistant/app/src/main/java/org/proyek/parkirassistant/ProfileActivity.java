@@ -1,10 +1,13 @@
 package org.proyek.parkirassistant;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
+import androidx.core.graphics.drawable.DrawableCompat;
 
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.media.Image;
 import android.net.ConnectivityManager;
 import android.net.Network;
 import android.net.NetworkCapabilities;
@@ -52,6 +55,7 @@ public class ProfileActivity extends AppCompatActivity {
 
     ImageView middleButton;
     ImageView qrCode;
+    ImageView profileButton;
 
     ScrollView scrollView;
     LinearLayout linearLayout;
@@ -72,6 +76,12 @@ public class ProfileActivity extends AppCompatActivity {
 
         qrCode = (ImageView) findViewById(R.id.QRCode);
         middleButton = (ImageView) findViewById(R.id.middle_icon_button_profile);
+        profileButton = (ImageView) findViewById(R.id.profile_icon_button_profile);
+
+        DrawableCompat.setTint(
+                DrawableCompat.wrap(profileButton.getDrawable()),
+                ContextCompat.getColor(this, android.R.color.white)
+        );
 
         scrollView = (ScrollView) findViewById(R.id.scroll_layout_profile);
         linearLayout = (LinearLayout) findViewById(R.id.before_login_layout_profile);
@@ -95,6 +105,11 @@ public class ProfileActivity extends AppCompatActivity {
                 middleButton.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
+                        DrawableCompat.setTint(
+                                DrawableCompat.wrap(profileButton.getDrawable()),
+                                ContextCompat.getColor(ProfileActivity.this, android.R.color.black)
+                        );
+
                         Intent i = new Intent(getApplicationContext(), ScanActivity.class);
                         startActivity(i);
                         finish();
@@ -120,6 +135,11 @@ public class ProfileActivity extends AppCompatActivity {
                 middleButton.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
+                        DrawableCompat.setTint(
+                                DrawableCompat.wrap(profileButton.getDrawable()),
+                                ContextCompat.getColor(ProfileActivity.this, android.R.color.black)
+                        );
+
                         Intent i = new Intent(getApplicationContext(), BookingActivity.class);
                         startActivity(i);
                         finish();
@@ -147,6 +167,11 @@ public class ProfileActivity extends AppCompatActivity {
             middleButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
+                    DrawableCompat.setTint(
+                            DrawableCompat.wrap(profileButton.getDrawable()),
+                            ContextCompat.getColor(ProfileActivity.this, android.R.color.black)
+                    );
+
                     Intent i = new Intent(getApplicationContext(), BookingActivity.class);
                     startActivity(i);
                     finish();
@@ -244,6 +269,11 @@ public class ProfileActivity extends AppCompatActivity {
 
 
     public void onClickHome(View view) {
+        DrawableCompat.setTint(
+                DrawableCompat.wrap(profileButton.getDrawable()),
+                ContextCompat.getColor(this, android.R.color.black)
+        );
+
         Intent i = new Intent(this, HomeScreen.class);
         startActivity(i);
         finish();

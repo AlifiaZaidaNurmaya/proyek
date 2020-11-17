@@ -2,6 +2,8 @@ package org.proyek.parkirassistant;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.core.content.ContextCompat;
+import androidx.core.graphics.drawable.DrawableCompat;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -36,9 +38,14 @@ public class HomeScreen extends AppCompatActivity {
 
         shared = new SharedPrefManager(getApplicationContext());
 
-        homeIcon = (ImageView) findViewById(R.id.home_icon);
-        profileIcon = (ImageView) findViewById(R.id.profile_icon);
+        homeIcon = (ImageView) findViewById(R.id.home_icon_button_home);
+        profileIcon = (ImageView) findViewById(R.id.profile_icon_button_home);
         logoutBtn = (TextView) findViewById(R.id.logout_home);
+
+        DrawableCompat.setTint(
+                DrawableCompat.wrap(homeIcon.getDrawable()),
+                ContextCompat.getColor(this, android.R.color.white)
+        );
 
         middleButton = (ImageView) findViewById(R.id.middle_icon_button_home);
 
@@ -67,6 +74,12 @@ public class HomeScreen extends AppCompatActivity {
                 middleButton.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
+                        DrawableCompat.setTint(
+                                DrawableCompat.wrap(homeIcon.getDrawable()),
+                                ContextCompat.getColor(HomeScreen.this, android.R.color.black)
+                        );
+
+                        overridePendingTransition(0,0);
                         Intent i = new Intent(getApplicationContext(),ScanActivity.class);
                         startActivity(i);
                         finish();
@@ -82,7 +95,13 @@ public class HomeScreen extends AppCompatActivity {
                 middleButton.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
+                        DrawableCompat.setTint(
+                                DrawableCompat.wrap(homeIcon.getDrawable()),
+                                ContextCompat.getColor(HomeScreen.this, android.R.color.black)
+                        );
+
                         Intent i = new Intent(getApplicationContext(),BookingActivity.class);
+                        overridePendingTransition(0,0);
                         startActivity(i);
                         finish();
                     }
@@ -118,7 +137,13 @@ public class HomeScreen extends AppCompatActivity {
             middleButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
+                    DrawableCompat.setTint(
+                            DrawableCompat.wrap(homeIcon.getDrawable()),
+                            ContextCompat.getColor(HomeScreen.this, android.R.color.black)
+                    );
+
                     Intent i = new Intent(getApplicationContext(),BookingActivity.class);
+                    overridePendingTransition(0,0);
                     startActivity(i);
                 }
             });
@@ -129,7 +154,13 @@ public class HomeScreen extends AppCompatActivity {
     }
 
     public void onClickLogin(View view) {
+        DrawableCompat.setTint(
+                DrawableCompat.wrap(homeIcon.getDrawable()),
+                ContextCompat.getColor(this, android.R.color.black)
+        );
+
         Intent i = new Intent(this, LoginActivity.class);
+        overridePendingTransition(0,0);
         startActivity(i);
         finish();
     }
@@ -148,7 +179,13 @@ public class HomeScreen extends AppCompatActivity {
     }
 
     public void onClickProfil(View view) {
+        DrawableCompat.setTint(
+                DrawableCompat.wrap(homeIcon.getDrawable()),
+                ContextCompat.getColor(this, android.R.color.black)
+        );
+
         Intent i = new Intent(this, ProfileActivity.class);
+        overridePendingTransition(0,0);
         startActivity(i);
         finish();
     }

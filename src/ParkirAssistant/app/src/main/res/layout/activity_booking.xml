@@ -503,6 +503,7 @@
                 app:layout_constraintBottom_toBottomOf="parent"/>
 
             <ImageView
+                android:id="@+id/note"
                 android:layout_width="149dp"
                 android:layout_height="91dp"
                 android:layout_marginTop="90dp"
@@ -514,6 +515,19 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/input_nama_booking"
                 app:layout_constraintTop_toBottomOf="@+id/bg_legenda" />
+
+            <TextView
+                android:id="@+id/countdown_booking"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="ini countdown"
+                android:visibility="visible"
+                android:layout_marginTop="30dp"
+                android:layout_marginLeft="200dp"
+                android:layout_marginStart="200dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/note" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -541,7 +555,7 @@
         app:layout_constraintTop_toTopOf="@id/bg_footer">
 
         <ImageView
-            android:id="@+id/home_icon"
+            android:id="@+id/home_icon_booking"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="60dp"
@@ -553,7 +567,7 @@
             android:onClick="onClickHome"/>
 
         <ImageView
-            android:id="@+id/booking_icon"
+            android:id="@+id/booking_icon_booking"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="30dp"
@@ -564,7 +578,7 @@
             android:src="@drawable/ic_booking_icon" />
 
         <ImageView
-            android:id="@+id/profile_icon"
+            android:id="@+id/profile_icon_booking"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="30dp"

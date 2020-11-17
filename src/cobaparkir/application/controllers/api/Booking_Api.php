@@ -31,16 +31,28 @@ class Booking_Api extends RestController {
     }
 
     public function input_post(){
-        $idPelanggan = $this->post('id_pelanggan');
         $noParkir = $this->post('no_parkir');
-        $jamBooking = $this->post('jam_booking');
-        
-        if($idPelanggan != null && $noParkir != null && $jamBooking != null ){
-            $idParkir = $this->parkir-> getIDParkirByNoParkir($noParkir);
-            $inputBooking = $this->booking->inputBookingData($idParkir);
-            if($inputBooking > 0){
-                $this->response(array('status'=>true,),RestController::HTTP_OK);
+        $data = [
+            'id_pelanggan' => $this->post('id_pelanggan'),
+            'jam_booking' => $this->post('jam_booking')
+        ];
+        if($noParkir != null && $data != null){
+            $idParkir = $this->parkir->getIDParkirByNoParkir($noParkir);
+            
+            foreach ($idParkir as $id_parkir) {
+                $data['id_parkir'] = $id_parkir['id_parkir'];
             }
+            
+            $inputBooking = $this->booking->inputBookingData($data);
+            if($inputBooking > 0){
+                $this->response(array('status'=>true,'message'=>'input booking berhasil'),RestController::HTTP_OK);
+            }else{
+                $this->response(array('status'=>false,'message'=>'input booking gagal!'),RestController::HTTP_OK);
+
+            }
+        }else{
+            $this->response(array('status'=>false,'message'=>'inputan kosong!'),RestController::HTTP_OK);
+
         }
     }
 

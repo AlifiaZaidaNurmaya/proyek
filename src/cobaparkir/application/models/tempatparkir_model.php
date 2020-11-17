@@ -14,7 +14,7 @@ class tempatparkir_model extends CI_Model {
         $this->db->from('tempat_parkir');
         
         $this->db->where('no_parkir',$noParkir);
-        
+        return $this->db->get()->result_array();
     }
 
 }
