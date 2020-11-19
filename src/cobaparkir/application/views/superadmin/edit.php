@@ -33,12 +33,12 @@
                         value="<?= $super_admin['nama'];?>">
                     </div>
                     <div class="form-group">
-                        <label for="email">Email</label>
+                        <label for="username">Username</label>
                         <input type="text"
                             class="form-control"
-                            id="email"
-                            name="email"
-                        value="<?= $super_admin['email'];?>">
+                            id="username"
+                            name="username"
+                        value="<?= $super_admin['username'];?>">
                     </div>
                     <div class="form-group">
                         <label for="password">Password</label>
@@ -47,6 +47,14 @@
                             id="password"
                             name="password"
                         value="<?= $super_admin['password'];?>">
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="text"
+                            class="form-control"
+                            id="email"
+                            name="email"
+                        value="<?= $super_admin['email'];?>">
                     </div>
                     <div class="form-group">
                         <label for="alamat">Alamat</label>

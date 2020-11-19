@@ -10,19 +10,10 @@ class tempatparkir_model extends CI_Model {
     }
 
     public function getIDParkirByNoParkir($noParkir){
-        $this->db->select('id_parkir, is_booked');
+        $this->db->select('id_parkir');
         $this->db->from('tempat_parkir');
         
         $this->db->where('no_parkir',$noParkir);
-        return $this->db->get()->result_array();
-    }
-
-    public function updateIsBookedByNoParkir($noParkir,$data){
-        
-        $this->db->where('no_parkir', $noParkir);
-        $this->db->update('tempat_parkir', $data);
-        return $this->db->affected_rows();
-
         
     }
 
