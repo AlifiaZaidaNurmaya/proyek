@@ -64,7 +64,7 @@
                         <td><?php echo $pt['email']; ?></td>
                         <td><?php echo $pt['password']; ?></td>
                         <td><?php echo $pt['alamat']; ?></td>
-                        <td><?php echo $pt['no_telepon']; ?></td>
+                        <td><?php echo $pt['nomor_telepon']; ?></td>
                         <td><a href="<?= base_url(); ?>petugas/hapus/<?= $pt['id_petugas']; ?>" class="badge badge-danger float-right" onclick="return confirm('Yakin Data ini akan dihapus');">Hapus</a></td>
                         <td><a href="<?= base_url(); ?>petugas/edit/<?= $pt['id_petugas']; ?>" class="badge badge-success float-right">Edit</a></td>
                     </tr>
