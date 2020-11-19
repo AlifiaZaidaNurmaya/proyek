@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 16, 2020 at 09:15 AM
+-- Generation Time: Nov 19, 2020 at 06:03 AM
 -- Server version: 10.4.11-MariaDB
 -- PHP Version: 7.4.4
 
@@ -30,7 +30,7 @@ SET time_zone = "+00:00";
 CREATE TABLE `booking` (
   `id_booking` int(100) NOT NULL,
   `id_pelanggan` int(100) NOT NULL,
-  `jam_booking` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `jam_booking` time DEFAULT current_timestamp(),
   `id_parkir` int(10) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -39,8 +39,14 @@ CREATE TABLE `booking` (
 --
 
 INSERT INTO `booking` (`id_booking`, `id_pelanggan`, `jam_booking`, `id_parkir`) VALUES
-(124, 1, '2020-10-29 17:30:40', 1),
-(125, 11, '2020-10-29 18:38:13', 2);
+(124, 1, '00:30:40', 1),
+(125, 11, '01:38:13', 2),
+(129, 11, '00:02:12', 8),
+(135, 11, '00:02:12', 8),
+(143, 11, '00:02:12', 8),
+(144, 11, '00:02:12', 8),
+(145, 11, '00:02:12', 8),
+(166, 3, '19:41:17', 9);
 
 -- --------------------------------------------------------
 
@@ -52,10 +58,10 @@ CREATE TABLE `entry` (
   `id_entry` int(10) NOT NULL,
   `id_pelanggan` int(10) NOT NULL,
   `id_booking` int(10) DEFAULT NULL,
-  `jam_entry` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `jam_entry` time NOT NULL DEFAULT current_timestamp(),
   `harga_perjam` varchar(10) DEFAULT NULL,
   `durasi_entry` varchar(15) DEFAULT NULL,
-  `jam_checkout` timestamp NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `jam_checkout` time DEFAULT current_timestamp(),
   `id_parkir` int(10) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -64,7 +70,7 @@ CREATE TABLE `entry` (
 --
 
 INSERT INTO `entry` (`id_entry`, `id_pelanggan`, `id_booking`, `jam_entry`, `harga_perjam`, `durasi_entry`, `jam_checkout`, `id_parkir`) VALUES
-(667, 1, 124, '2020-10-29 22:42:08', '2000', NULL, '2020-10-29 22:42:08', 3);
+(667, 1, 124, '05:42:08', '2000', NULL, '05:42:08', 3);
 
 -- --------------------------------------------------------
 
@@ -90,12 +96,11 @@ CREATE TABLE `pelanggan` (
 --
 
 INSERT INTO `pelanggan` (`id_pelanggan`, `nama`, `username`, `password`, `alamat`, `nomor_plat`, `nomor_telepon`, `no_identitas`, `email`, `huruf_acak`) VALUES
-(1, 'Hoyeh Da Vinci', 'hoyehdav', 'hoyeh', 'Jl. Batubara No. 20', 'H 474 R', 892348978, 2147483647, 'hoyeh.davinci@gmail.com', 'GCvW'),
+(1, 'Hoyeh Vinci', 'hoyehdav', 'hoyeh', 'Jl. Batubara No. 20', 'H 474 R', 892348978, 2147483647, 'hoyeh.davinci@gmail.com', 'GCvW'),
 (3, 'Garit Franco', 'garitfra', 'garit', 'Jl. Raya No. 12', 'R 311 YV', 321782, 2147483647, 'garitfranco@gmail.com', 'kZVY'),
 (11, 'Andi', 'andi', 'andikeren69', 'Jl. Sudirman, Malang, Jawa Timur', 'N 123 N', 83000000, 12345, 'andimantap@gmail.com', '123'),
 (12, 'Joko Froyo', 'jokokoj', 'jokosamudro', 'Jl. Belimbing Wuluh No. 15', 'W 1123 XX', 87346723, 2147483647, 'jokosamudro@gmail.com', 'HaSs'),
 (13, 'Joko Winarno', 'jokokoj', 'joko123', 'Jl. Belimbing Starfruit No. 35', 'W 5409 VW', 87346723, 2147483647, 'joko@gmail.com', 'heWw'),
-(14, 'Joko Winarno', 'jokokoj', 'joko123', 'Jl. Belimbing Starfruit No. 35', 'W 5409 VW', 87346723, 2147483647, 'joko@gmail.com', 'heWw'),
 (15, 'Yusril', NULL, 'uhuy', 'JL. Landak', 'X 2345 VS', 87654321, 12345678, 'yusril@rocketmail.com', 'gdhd');
 
 -- --------------------------------------------------------
@@ -165,13 +170,13 @@ INSERT INTO `tempat_parkir` (`id_parkir`, `no_parkir`, `is_booked`) VALUES
 (1, '1C', 1),
 (2, '2C', 1),
 (3, '3C', 0),
-(4, '4C', 0),
+(4, '4C', 1),
 (5, '5C', 0),
 (6, '6C', 0),
 (7, '7C', 0),
 (8, '8C', 1),
 (9, '9C', 0),
-(10, '10C', 0),
+(10, '10C', 1),
 (11, '11C', 0),
 (12, '12C', 0),
 (13, '1M', 0),
@@ -194,6 +199,7 @@ CREATE TABLE `transaksi` (
   `id_entry` int(100) NOT NULL,
   `jenis_transaksi` varchar(255) DEFAULT NULL,
   `jam_checkOut` time NOT NULL,
+  `tanggal` date NOT NULL,
   `total` int(10) NOT NULL,
   `id_petugas` int(10) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -202,9 +208,9 @@ CREATE TABLE `transaksi` (
 -- Dumping data for table `transaksi`
 --
 
-INSERT INTO `transaksi` (`id_transaksi`, `id_entry`, `jenis_transaksi`, `jam_checkOut`, `total`, `id_petugas`) VALUES
-(1, 667, 'e-wallet', '20:40:15', 10000, 90),
-(2, 667, 'e-wallet', '20:38:52', 2000, 90);
+INSERT INTO `transaksi` (`id_transaksi`, `id_entry`, `jenis_transaksi`, `jam_checkOut`, `tanggal`, `total`, `id_petugas`) VALUES
+(1, 667, 'e-wallet', '20:40:15', '2020-11-16', 10000, 90),
+(2, 667, 'e-wallet', '20:38:52', '2020-11-15', 2000, 90);
 
 --
 -- Indexes for dumped tables
@@ -267,7 +273,7 @@ ALTER TABLE `transaksi`
 -- AUTO_INCREMENT for table `booking`
 --
 ALTER TABLE `booking`
-  MODIFY `id_booking` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=126;
+  MODIFY `id_booking` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=167;
 
 --
 -- AUTO_INCREMENT for table `entry`
