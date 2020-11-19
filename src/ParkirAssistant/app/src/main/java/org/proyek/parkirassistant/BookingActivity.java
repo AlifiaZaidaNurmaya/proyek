@@ -1,14 +1,16 @@
 package org.proyek.parkirassistant;
 
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
+import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.net.Network;
 import android.net.NetworkCapabilities;
 import android.net.NetworkInfo;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.CountDownTimer;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -29,8 +31,8 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.Date;
+import java.util.Locale;
 import java.util.Objects;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -39,6 +41,16 @@ import androidx.core.graphics.drawable.DrawableCompat;
 
 
 public class BookingActivity extends AppCompatActivity {
+
+    private static final String TAG = "BroadcastReceiver";
+//    private static final long START_TIME_IN_MILLIS = 900000;
+//    private CountDownTimer mCountDownTimer;
+//    private boolean mTimerRunning = false;
+
+//    private long mTimeLeftInMillis;
+
+//    private long mEndTime;
+
 
     ImageView homeIcon;
     ImageView bookingIcon;
@@ -59,19 +71,18 @@ public class BookingActivity extends AppCompatActivity {
     LinearLayout linearLayout;
 
     boolean status = false;
-    int []idParkir;
-    String []noParkir;
-    int []isBooked;
+    int[] idParkir;
+    String[] noParkir;
+    int[] isBooked;
 
-    CountDownTimer mCountDownTimer;
 
     SharedPrefManager shared;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_booking);
-
 
 
         homeIcon = (ImageView) findViewById(R.id.home_icon_booking);
@@ -127,7 +138,7 @@ public class BookingActivity extends AppCompatActivity {
 
         shared = new SharedPrefManager(getApplicationContext());
 
-        if(shared.getSPStatus()){
+        if (shared.getSPStatus()) {
             inputNama.setText(shared.getSPNama());
             inputNoIdentitas.setText(String.valueOf(shared.getSPNoIdentitas()));
             inputPlat.setText(shared.getSPNomorPlat());
@@ -144,6 +155,12 @@ public class BookingActivity extends AppCompatActivity {
                     // input data booking
                     insertBookingData(timeMySQLInput);
 
+                    startService(new Intent(BookingActivity.this, BroadcastCountdownService.class));
+                    Log.i(TAG, "Started service");
+                    updateParkir();
+//                    startTimer();
+
+
 //                    new CountDownTimer(900000, 1000) {
 //
 //                        public void onTick(long millisUntilFinished) {
@@ -158,7 +175,7 @@ public class BookingActivity extends AppCompatActivity {
 
                 }
             });
-        }else{
+        } else {
             scrollView.setVisibility(View.INVISIBLE);
             linearLayout.setVisibility(View.VISIBLE);
 
@@ -166,18 +183,13 @@ public class BookingActivity extends AppCompatActivity {
 
     }
 
-    private void deleteBookingData() {
-
-    }
-
-    // input data booking
-    private void insertBookingData(String time) {
-        if(checkNetworkConnection()){
-            AndroidNetworking.post(DBContract.SERVER_INSERT_BOOKING_URL)
-                    .addBodyParameter("id_pelanggan",String.valueOf(shared.getSPIdPengguna()))
-                    .addBodyParameter("no_parkir",inputNoParkir.getText().toString())
-                    .addBodyParameter("jam_booking", time)
-                    .addHeaders("Content-Type","application/json")
+    private void updateParkir() {
+        if (checkNetworkConnection()) {
+            AndroidNetworking.post(DBContract.SERVER_UPDATE_PARKIR_BOOKING_URL)
+                    .addBodyParameter("id_pelanggan", String.valueOf(shared.getSPIdPengguna()))
+//                    .addBodyParameter("no_parkir", inputNoParkir.getText().toString())
+//                    .addBodyParameter("jam_booking", )
+                    .addHeaders("Content-Type", "application/json")
                     .setTag("test input")
                     .setPriority(Priority.HIGH)
                     .build()
@@ -187,10 +199,134 @@ public class BookingActivity extends AppCompatActivity {
                             try {
                                 boolean stts = response.getBoolean("status");
                                 String msg = response.getString("message");
-                                if(stts){
+                                if (stts) {
+                                    Toast.makeText(getApplicationContext(), msg, Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(getApplicationContext(), "Segera tempati lokasi parkir anda dalam 15 menit", Toast.LENGTH_LONG).show();
+                                }
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+
+
+                        }
+
+                        @Override
+                        public void onError(ANError anError) {
+                            Toast.makeText(getApplicationContext(), "Gagal input data, error : " + anError.getMessage(), Toast.LENGTH_LONG).show();
+
+                            finish();
+                            overridePendingTransition(0, 0);
+                            startActivity(getIntent());
+                            overridePendingTransition(0, 0);
+                        }
+                    });
+        } else {
+            Toast.makeText(getApplicationContext(), "Tidak ada koneksi internet", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    private BroadcastReceiver br = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            updateGUI(intent);
+        }
+    };
+
+    private void updateGUI(Intent intent) {
+        if (intent.getExtras() != null) {
+            long mTimeLeftInMillis = intent.getLongExtra("countdown", 0);
+            int minutes = (int) (mTimeLeftInMillis / 1000) / 60;
+            int seconds = (int) (mTimeLeftInMillis / 1000) % 60;
+
+            String timeLeftFormatted = String.format(Locale.getDefault(), "%02d:%02d", minutes, seconds);
+
+            countdownText.setText("Sisa waktu booking: \n" + timeLeftFormatted);
+
+//            SharedPreferences sharedPreferences = getSharedPreferences(getPackageName(),MODE_PRIVATE);
+//            sharedPreferences.edit().putLong("mTimeLeftInMills",mTimeLeftInMillis).apply();
+
+//            shared.saveSPLong(SharedPrefManager.SP_MILLIS_LEFT,mTimeLeftInMillis);
+
+            if(mTimeLeftInMillis == 0){
+                countdownText.setText("Waktu anda habis!");
+                deleteBookingData();
+            }
+        }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        registerReceiver(br, new IntentFilter(BroadcastCountdownService.COUNTDOWN_BR));
+        Log.i(TAG, "Registered broacast receiver");
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        unregisterReceiver(br);
+        Log.i(TAG, "Unregistered broacast receiver");
+    }
+
+    @Override
+    protected void onStop() {
+        try {
+            unregisterReceiver(br);
+        } catch (Exception e) {
+            Log.i(TAG, Objects.requireNonNull(e.getMessage()));
+        }
+        super.onStop();
+    }
+
+    @Override
+    protected void onDestroy() {
+        stopService(new Intent(this, BroadcastCountdownService.class));
+        Log.i(TAG, "Stopped service");
+        super.onDestroy();
+    }
+
+    //    private void startTimer() {
+//
+//        mCountDownTimer = new CountDownTimer(mTimeLeftInMillis, 1000) {
+//            @Override
+//            public void onTick(long l) {
+//                mTimeLeftInMillis = l;
+//                int minutes = (int) (mTimeLeftInMillis / 1000) / 60;
+//                int seconds = (int) (mTimeLeftInMillis / 1000) % 60;
+//
+//                String timeLeftFormatted = String.format(Locale.getDefault(), "%02d:%02d", minutes, seconds);
+//
+//                countdownText.setText("Sisa waktu booking: \n" + timeLeftFormatted);
+//            }
+//
+//            @Override
+//            public void onFinish() {
+//                countdownText.setText("Teeeett waktu habis!");
+//                deleteBookingData();
+//            }
+//        }.start();
+//    }
+
+    private void deleteBookingData() {
+        if (checkNetworkConnection()) {
+            AndroidNetworking.post(DBContract.SERVER_DELETE_BOOKING_URL)
+                    .addBodyParameter("id_pelanggan", String.valueOf(shared.getSPIdPengguna()))
+//                    .addBodyParameter("no_parkir", inputNoParkir.getText().toString())
+//                    .addBodyParameter("jam_booking", )
+                    .addHeaders("Content-Type", "application/json")
+                    .setTag("test input")
+                    .setPriority(Priority.HIGH)
+                    .build()
+                    .getAsJSONObject(new JSONObjectRequestListener() {
+                        @Override
+                        public void onResponse(JSONObject response) {
+                            try {
+                                boolean stts = response.getBoolean("status");
+                                String msg = response.getString("message");
+                                if (stts) {
 
                                     Toast.makeText(getApplicationContext(), msg, Toast.LENGTH_SHORT).show();
-                                    Toast.makeText(getApplicationContext(),"Segera tempati lokasi parkir anda dalam 15 menit", Toast.LENGTH_LONG).show();
+                                    Toast.makeText(getApplicationContext(), "Segera tempati lokasi parkir anda dalam 15 menit", Toast.LENGTH_LONG).show();
 
                                 }
                             } catch (JSONException e) {
@@ -202,22 +338,78 @@ public class BookingActivity extends AppCompatActivity {
 
                         @Override
                         public void onError(ANError anError) {
-                            Toast.makeText(getApplicationContext(), "Gagal input data, error : "+anError.getMessage(), Toast.LENGTH_LONG).show();
+                            Toast.makeText(getApplicationContext(), "Gagal input data, error : " + anError.getMessage(), Toast.LENGTH_LONG).show();
 
                             finish();
-                            overridePendingTransition(0,0);
+                            overridePendingTransition(0, 0);
                             startActivity(getIntent());
-                            overridePendingTransition(0,0);
+                            overridePendingTransition(0, 0);
                         }
                     });
-        }else{
+        } else {
+            Toast.makeText(getApplicationContext(), "Tidak ada koneksi internet", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    // input data booking
+    private void insertBookingData(String time) {
+        if (checkNetworkConnection()) {
+            AndroidNetworking.post(DBContract.SERVER_INSERT_BOOKING_URL)
+                    .addBodyParameter("id_pelanggan", String.valueOf(shared.getSPIdPengguna()))
+                    .addBodyParameter("no_parkir", inputNoParkir.getText().toString())
+                    .addBodyParameter("jam_booking", time)
+                    .addHeaders("Content-Type", "application/json")
+                    .setTag("test input")
+                    .setPriority(Priority.HIGH)
+                    .build()
+                    .getAsJSONObject(new JSONObjectRequestListener() {
+                        @Override
+                        public void onResponse(JSONObject response) {
+                            try {
+                                boolean stts = response.getBoolean("status");
+                                String msg = response.getString("message");
+                                int idBooking = 0;
+                                String noParkir = inputNoParkir.getText().toString();
+                                if (stts) {
+                                    JSONArray jsonArray = response.getJSONArray("data");
+                                    for (int i = 0; i < jsonArray.length(); i++) {
+                                        JSONObject data = jsonArray.getJSONObject(i);
+
+                                        idBooking = data.getInt("id_booking");
+                                    }
+
+                                    shared.saveSPInt(SharedPrefManager.SP_ID_BOOKING, idBooking);
+                                    shared.saveSPString(SharedPrefManager.SP_NO_PARKIR_BOOKING, noParkir);
+
+                                    Toast.makeText(getApplicationContext(), msg, Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(getApplicationContext(), "Segera tempati lokasi parkir anda dalam 15 menit", Toast.LENGTH_LONG).show();
+
+                                }
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+
+
+                        }
+
+                        @Override
+                        public void onError(ANError anError) {
+                            Toast.makeText(getApplicationContext(), "Gagal input data, error : " + anError.getMessage(), Toast.LENGTH_LONG).show();
+
+                            finish();
+                            overridePendingTransition(0, 0);
+                            startActivity(getIntent());
+                            overridePendingTransition(0, 0);
+                        }
+                    });
+        } else {
             Toast.makeText(getApplicationContext(), "Tidak ada koneksi internet", Toast.LENGTH_SHORT).show();
         }
     }
 
     // mengecek apakah pada booking sudah ada datanya.
     private void checkBookedParking() {
-        if(checkNetworkConnection()){
+        if (checkNetworkConnection()) {
 //            String idPelanggan = String.valueOf(shared.getSPIdPengguna());
 
 
@@ -242,12 +434,12 @@ public class BookingActivity extends AppCompatActivity {
                                         idParkir[i] = data.getInt("id_parkir");
                                         noParkir[i] = data.getString("no_parkir");
                                         isBooked[i] = data.getInt("is_booked");
-                                        if((box[i].getText().toString()).equals(noParkir[i])){
+                                        if ((box[i].getText().toString()).equals(noParkir[i])) {
 
-                                            if(isBooked[i] == 0){
-                                                box[i].setBackgroundColor(ContextCompat.getColor(getApplicationContext(),R.color.not_booked_color));
-                                            }else{
-                                                box[i].setBackgroundColor(ContextCompat.getColor(getApplicationContext(),R.color.booked_color));
+                                            if (isBooked[i] == 0) {
+                                                box[i].setBackgroundColor(ContextCompat.getColor(getApplicationContext(), R.color.not_booked_color));
+                                            } else {
+                                                box[i].setBackgroundColor(ContextCompat.getColor(getApplicationContext(), R.color.booked_color));
                                             }
                                         }
                                     }
@@ -292,7 +484,7 @@ public class BookingActivity extends AppCompatActivity {
                             }
                         }
                     });
-        }else{
+        } else {
             Toast.makeText(getApplicationContext(), "Tidak ada koneksi internet", Toast.LENGTH_SHORT).show();
         }
     }
@@ -320,11 +512,11 @@ public class BookingActivity extends AppCompatActivity {
                 ContextCompat.getColor(this, android.R.color.black)
         );
 
-        Intent i = new Intent(this,HomeScreen.class);
-        overridePendingTransition(0,0);
+        Intent i = new Intent(this, HomeScreen.class);
+        overridePendingTransition(0, 0);
         startActivity(i);
-        overridePendingTransition(0,0);
-        finish();
+        overridePendingTransition(0, 0);
+//        finish();
     }
 
     public void onClickProfil(View view) {
@@ -334,9 +526,9 @@ public class BookingActivity extends AppCompatActivity {
         );
 
         Intent i = new Intent(this, ProfileActivity.class);
-        overridePendingTransition(0,0);
+        overridePendingTransition(0, 0);
         startActivity(i);
-        overridePendingTransition(0,0);
-        finish();
+        overridePendingTransition(0, 0);
+//        finish();
     }
 }

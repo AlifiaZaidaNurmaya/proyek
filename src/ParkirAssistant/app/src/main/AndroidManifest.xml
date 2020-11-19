@@ -27,6 +27,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <service android:name=".BroadcastCountdownService"/>
         <activity android:name=".ProfileActivity" />
         <activity android:name=".HomeScreen" />
         <activity android:name=".LoginActivity" />

@@ -33,6 +33,13 @@ class booking_model extends CI_Model {
         $this->db->where('id_booking', $id);
         $this->db->delete('booking');
     }
+    
+    public function deleteBookingByIDPelanggan($id_pelanggan)
+    {
+        $this->db->where('id_pelanggan', $id_pelanggan);
+        $this->db->delete('booking');
+        return $this->db->affected_rows();
+    }
 
     public function getBookingByID($id)
     {
@@ -43,6 +50,17 @@ class booking_model extends CI_Model {
         $this->db->where('id_booking', $id);
         
         return $this->db->get()->row_array();
+    }
+
+    public function getBookingByIDPelangganAndroid($id)
+    {
+        $this->db->select('id_booking,b.id_pelanggan,nama,nomor_plat,no_identitas,jam_booking,no_parkir');
+        $this->db->from('booking b');
+        $this->db->join('pelanggan p', 'b.id_pelanggan = p.id_pelanggan');
+        $this->db->join('tempat_parkir tp', 'b.id_parkir = tp.id_parkir');
+        $this->db->where('b.id_pelanggan', $id);
+        
+        return $this->db->get()->result_array();
     }
     
     public function getBookingByHurufAcak($hurufAcak)

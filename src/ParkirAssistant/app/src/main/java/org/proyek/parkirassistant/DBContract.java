@@ -10,11 +10,13 @@ package org.proyek.parkirassistant;
 
 
 public class DBContract {
-    public static final String SERVER_LOGIN_URL = "http://192.168.1.7/cobaparkir/api/Login_Api/auth";
-    public static final String SERVER_SIGNUP_URL = "http://192.168.1.7/cobaparkir/api/Signup_Api/auth";
-    public static final String SERVER_UPDATE_URL = "http://192.168.1.7/cobaparkir/api/Updateprofile_Api/auth";
-    public static final String SERVER_BOOKING_URL = "http://192.168.1.7/cobaparkir/api/Booking_Api/cek";
-    public static final String SERVER_RIWAYAT_TRANSAKSI_URL = "http://192.168.1.7/cobaparkir/api/Transaksi_Api/riwayat";
-    public static final String SERVER_INSERT_BOOKING_URL = "http://192.168.1.7/cobaparkir/api/Booking_Api/input";
+    public static final String SERVER_LOGIN_URL = "http://192.168.1.5/cobaparkir/api/Login_Api/auth";
+    public static final String SERVER_SIGNUP_URL = "http://192.168.1.5/cobaparkir/api/Signup_Api/auth";
+    public static final String SERVER_UPDATE_URL = "http://192.168.1.5/cobaparkir/api/Updateprofile_Api/auth";
+    public static final String SERVER_BOOKING_URL = "http://192.168.1.5/cobaparkir/api/Booking_Api/cek";
+    public static final String SERVER_RIWAYAT_TRANSAKSI_URL = "http://192.168.1.5/cobaparkir/api/Transaksi_Api/riwayat";
+    public static final String SERVER_INSERT_BOOKING_URL = "http://192.168.1.5/cobaparkir/api/Booking_Api/input";
+    public static final String SERVER_DELETE_BOOKING_URL = "http://192.168.1.5/cobaparkir/api/Booking_Api/delete";
+    public static final String SERVER_UPDATE_PARKIR_BOOKING_URL = "http://192.168.1.5/cobaparkir/api/Booking_Api/changestatus";
 
 }
