@@ -27,6 +27,7 @@ class superadmin extends CI_Controller {
 
         $this->form_validation->set_rules('id_admin', 'Id_admin', 'required');
         $this->form_validation->set_rules('nama', 'Nama', 'required');
+        $this->form_validation->set_rules('username', 'Username', 'required');
         $this->form_validation->set_rules('email', 'Email', 'required');
         $this->form_validation->set_rules('password', 'Password', 'required');
         $this->form_validation->set_rules('alamat', 'Alamat', 'required');
@@ -58,6 +59,7 @@ class superadmin extends CI_Controller {
         $this->load->library('form_validation');
         $this->form_validation->set_rules('id_admin', 'Id_admin', 'required');
         $this->form_validation->set_rules('nama', 'Nama', 'required');
+        $this->form_validation->set_rules('username', 'Username', 'required');
         $this->form_validation->set_rules('email', 'Email', 'required');
         $this->form_validation->set_rules('password', 'Password', 'required');
         $this->form_validation->set_rules('alamat', 'Alamat', 'required');

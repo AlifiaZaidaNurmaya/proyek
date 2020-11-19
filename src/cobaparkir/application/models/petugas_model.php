@@ -16,7 +16,7 @@ class petugas_model extends CI_Model {
             "email" => $this->input->post('email', true),
             "password" => $this->input->post('password', true),
             "alamat" => $this->input->post('alamat', true),
-            "no_telepon" => $this->input->post('no_telepon', true)
+            "nomor_telepon" => $this->input->post('nomor_telepon', true)
         ];
         $this->db->insert('petugas', $data);
     }
@@ -40,7 +40,7 @@ class petugas_model extends CI_Model {
             "email" => $this->input->post('email', true),
             "password" => $this->input->post('password', true),
             "alamat" => $this->input->post('alamat', true),
-            "no_telepon" => $this->input->post('no_telepon', true)
+            "nomor_telepon" => $this->input->post('nomor_telepon', true)
         ];
         $this->db->where('id_petugas', $this->input->post('id_petugas'));
         $this->db->update('petugas', $data);

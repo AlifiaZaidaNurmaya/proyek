@@ -37,7 +37,7 @@
                     </div>
                     <div class="form-group">
                         <label for="no_telepon">No. Telepon</label>
-                        <input type="int" class="form-control" id="no_telepon" name="no_telepon">
+                        <input type="int" class="form-control" id="nomor_telepon" name="nomor_telepon">
                     </div>
                     <button type="submit" name="submit" class="btn btn-primary float-right" > Submit </button>
                     </form>
