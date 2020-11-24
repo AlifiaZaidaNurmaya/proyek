@@ -14,21 +14,25 @@ class entry_model extends CI_Model {
         return $query->result_array();
     }
 
-    // public function tambahDataEntry()
-    // {
-    //     $data = [
-    //         "id_booking" => $this->input->post('id_booking', true),
-    //         "id_pelanggan" => $this->input->post('id_pelanggan', true),
-    //         "no_parkir" => $this->input->post('no_parkir', true),
-    //         "jam_booking" => $this->input->post('jam_booking', true)
-    //     ];
-    //     $this->db->insert('booking', $data);
-    // }
+    public function tambahDataEntry($data)
+    {
+        $this->db->insert('entry', $data);
+        return $this->db->affected_rows();
+        
+    }
 
     public function hapusDataEntry($id)
     {
         $this->db->where('id_entry', $id);
         $this->db->delete('entry');
+    }
+    
+    public function deleteDataEntryByID($id)
+    {
+        $this->db->where('id_entry', $id);
+        $this->db->delete('entry');
+        return $this->db->affected_rows();
+        
     }
 
     public function getEntryByID($id)
@@ -41,6 +45,15 @@ class entry_model extends CI_Model {
         $this->db->join('tempat_parkir tpk', 'b.id_parkir = tpk.id_parkir');
         return $this->db->where('id_entry',$id)->row_array();
     }
+
+    public function getEntryByHurufAcak($hurufAcak){
+        $this->db->select('*');
+        $this->db->from('entry e');
+        $this->db->join('pelanggan p', 'e.id_pelanggan = p.id_pelanggan');
+        $this->db->where('p.huruf_acak', $hurufAcak);
+        return $this->db->get()->result_array();
+    }
+
 
     public function editDataEntry()
     {

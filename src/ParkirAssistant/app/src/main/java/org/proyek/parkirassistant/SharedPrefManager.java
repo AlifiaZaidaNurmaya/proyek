@@ -17,6 +17,7 @@ public class SharedPrefManager {
     public static final String SP_PARKIR_ASSISTANT = "spParkirAssistant";
 
     public static final String SP_ID_PENGGUNA = "spIdPengguna";
+    public static final String SP_ID_ENTRY = "spIdEntry";
     public static final String SP_ID_BOOKING = "spIdBooking";
     public static final String SP_NO_PARKIR_BOOKING = "spNoParkirBooking";
 
@@ -30,9 +31,10 @@ public class SharedPrefManager {
     public static final String SP_NOMOR_TELEPON = "spNomorTelepon";
     public static final String SP_HURUF_ACAK = "spHurufAcak";
 
-    public static final String SP_MILLIS_LEFT = "spMillisLeft";
-    public static final String SP_TIMER_RUNNING = "spTimerRunning";
-    public static final String SP_END_TIME = "spEndTime";
+    public static final String SP_IS_BOOKED = "spIsBooked";
+    public static final String SP_SCANNED = "spScanned";
+
+
 
     public static final String SP_ROLE = "spRole";
 
@@ -106,6 +108,9 @@ public class SharedPrefManager {
     public int getSPIdPengguna() {
         return sp.getInt(SP_ID_PENGGUNA, 0);
     }
+    public int getSPIdEntry() {
+        return sp.getInt(SP_ID_ENTRY, 0);
+    }
 
     public int getSPIdBooking() {
         return sp.getInt(SP_ID_BOOKING, 0);
@@ -118,16 +123,11 @@ public class SharedPrefManager {
         return sp.getString(SP_HURUF_ACAK, "");
     }
 
-    public long getSPMillisLeft(){
-        return sp.getLong(SP_MILLIS_LEFT,0);
+    public boolean getSPIsBooked(){
+        return sp.getBoolean(SP_IS_BOOKED,false);
     }
-
-    public boolean getTimerRunning(){
-        return sp.getBoolean(SP_TIMER_RUNNING,false);
-    }
-
-    public long getEndTime(){
-        return sp.getLong(SP_END_TIME,0);
+    public String getSPScanned(){
+        return sp.getString(SP_SCANNED,"");
     }
 
     public String getSPRole() {
@@ -136,6 +136,11 @@ public class SharedPrefManager {
 
     public void clearSPLogin() {
         spEditor.clear();
+        spEditor.commit();
+    }
+
+    public void removeSpecificSP(String SPKey){
+        spEditor.remove(SPKey);
         spEditor.commit();
     }
 

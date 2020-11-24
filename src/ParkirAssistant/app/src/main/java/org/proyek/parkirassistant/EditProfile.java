@@ -145,8 +145,8 @@ public class EditProfile extends AppCompatActivity {
 
 
                                     Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
-                                    Intent intenEdit = new Intent(getApplicationContext(), ProfileActivity.class);
-                                    startActivity(intenEdit);
+                                    Intent intentEdit = new Intent(getApplicationContext(), ProfileActivity.class);
+                                    startActivity(intentEdit);
                                     finish();
                                 } else {
                                     Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();

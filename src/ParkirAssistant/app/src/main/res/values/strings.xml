@@ -19,6 +19,8 @@
     <string name="scan">Scan</string>
     <string name="pindai_qr_code">Pindai QR Code</string>
     <string name="keterangan_penggunaan">Keterangan penggunaan</string>
+    <string name="channel_description">memunculkan notifikasi check in</string>
+    <string name="channel_name">Notifikasi check in</string>
 
     <string-array name="no_parkir">
         <item>1C</item>

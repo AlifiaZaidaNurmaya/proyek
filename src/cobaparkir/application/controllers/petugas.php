@@ -32,7 +32,7 @@ class petugas extends CI_Controller {
         $this->form_validation->set_rules('email', 'Email', 'required');
         $this->form_validation->set_rules('password', 'Password', 'required');
         $this->form_validation->set_rules('alamat', 'Alamat', 'required');
-        $this->form_validation->set_rules('nomor_telepon', 'nomor_telepon', 'required');
+        $this->form_validation->set_rules('no_telepon', 'no_telepon', 'required');
 
         if ($this->form_validation->run() == FALSE) {
             $this->load->view('template/adm_header', $data);
@@ -63,7 +63,7 @@ class petugas extends CI_Controller {
         $this->form_validation->set_rules('email', 'Email', 'required');
         $this->form_validation->set_rules('password', 'Password', 'required');
         $this->form_validation->set_rules('alamat', 'Alamat', 'required');
-        $this->form_validation->set_rules('nomor_telepon', 'nomor_telepon', 'required');
+        $this->form_validation->set_rules('no_telepon', 'no_telepon', 'required');
 
         if ($this->form_validation->run() == FALSE) {
             $this->load->view('template/adm_header', $data);

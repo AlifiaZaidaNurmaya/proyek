@@ -76,6 +76,8 @@ public class BookingActivity extends AppCompatActivity {
     int[] isBooked;
 
 
+
+
     SharedPrefManager shared;
 
 
@@ -158,6 +160,8 @@ public class BookingActivity extends AppCompatActivity {
                     startService(new Intent(BookingActivity.this, BroadcastCountdownService.class));
                     Log.i(TAG, "Started service");
                     updateParkir();
+
+                    startActivity(getIntent());
 //                    startTimer();
 
 
@@ -186,8 +190,8 @@ public class BookingActivity extends AppCompatActivity {
     private void updateParkir() {
         if (checkNetworkConnection()) {
             AndroidNetworking.post(DBContract.SERVER_UPDATE_PARKIR_BOOKING_URL)
-                    .addBodyParameter("id_pelanggan", String.valueOf(shared.getSPIdPengguna()))
-//                    .addBodyParameter("no_parkir", inputNoParkir.getText().toString())
+//                    .addBodyParameter("id_pelanggan", String.valueOf(shared.getSPIdPengguna()))
+                    .addBodyParameter("no_parkir", inputNoParkir.getText().toString())
 //                    .addBodyParameter("jam_booking", )
                     .addHeaders("Content-Type", "application/json")
                     .setTag("test input")
@@ -234,20 +238,22 @@ public class BookingActivity extends AppCompatActivity {
 
     private void updateGUI(Intent intent) {
         if (intent.getExtras() != null) {
-            long mTimeLeftInMillis = intent.getLongExtra("countdown", 0);
-            int minutes = (int) (mTimeLeftInMillis / 1000) / 60;
-            int seconds = (int) (mTimeLeftInMillis / 1000) % 60;
+            shared.saveSPBoolean(SharedPrefManager.SP_IS_BOOKED,intent.getBooleanExtra("timeup",false));
+            if(intent.getBooleanExtra("timeup", false)){
+                long mTimeLeftInMillis = intent.getLongExtra("countdown", 0);
+                int minutes = (int) (mTimeLeftInMillis / 1000) / 60;
+                int seconds = (int) (mTimeLeftInMillis / 1000) % 60;
 
-            String timeLeftFormatted = String.format(Locale.getDefault(), "%02d:%02d", minutes, seconds);
+                String timeLeftFormatted = String.format(Locale.getDefault(), "%02d:%02d", minutes, seconds);
 
-            countdownText.setText("Sisa waktu booking: \n" + timeLeftFormatted);
+                countdownText.setText("Sisa waktu booking: \n" + timeLeftFormatted);
 
 //            SharedPreferences sharedPreferences = getSharedPreferences(getPackageName(),MODE_PRIVATE);
 //            sharedPreferences.edit().putLong("mTimeLeftInMills",mTimeLeftInMillis).apply();
 
 //            shared.saveSPLong(SharedPrefManager.SP_MILLIS_LEFT,mTimeLeftInMillis);
 
-            if(mTimeLeftInMillis == 0){
+            }else{
                 countdownText.setText("Waktu anda habis!");
                 deleteBookingData();
             }

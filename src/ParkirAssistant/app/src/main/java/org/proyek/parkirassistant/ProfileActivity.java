@@ -1,9 +1,15 @@
 package org.proyek.parkirassistant;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.NotificationCompat;
+import androidx.core.app.NotificationManagerCompat;
 import androidx.core.content.ContextCompat;
 import androidx.core.graphics.drawable.DrawableCompat;
 
+import android.app.Notification;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -14,6 +20,7 @@ import android.net.NetworkCapabilities;
 import android.net.NetworkInfo;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
@@ -58,11 +65,13 @@ public class ProfileActivity extends AppCompatActivity {
     ImageView profileButton;
 
     ScrollView scrollView;
-    LinearLayout linearLayout;
+    LinearLayout linearLayout, linearList;
 
     SharedPrefManager shared;
 
     ListView lv;
+
+    String message = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -87,6 +96,8 @@ public class ProfileActivity extends AppCompatActivity {
         linearLayout = (LinearLayout) findViewById(R.id.before_login_layout_profile);
         lv = (ListView) findViewById(R.id.list_riwayat_transaksi);
 
+        linearList = (LinearLayout) findViewById(R.id.linearLayoutListRiwayat);
+
         shared = new SharedPrefManager(getApplicationContext());
 
         if (shared.getSPStatus()) {
@@ -99,6 +110,8 @@ public class ProfileActivity extends AppCompatActivity {
             if (shared.getSPRole().equals("petugas")) {
                 middleButton.setImageResource(R.drawable.ic_quick_response_code);
                 noIdentitasProfile.setText("Petugas");
+
+                linearList.setVisibility(View.GONE);
 
                 qrCode.setVisibility(View.GONE);
 
@@ -160,6 +173,50 @@ public class ProfileActivity extends AppCompatActivity {
                 }
             });
 
+            getNotification();
+
+            if(shared.getSPIdEntry() != 0){
+                int notifId = 1;
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                    CharSequence name = getString(R.string.channel_name);
+                    String description = getString(R.string.channel_description);
+                    int importance = NotificationManager.IMPORTANCE_DEFAULT;
+                    NotificationChannel channel = new NotificationChannel("1", name, importance);
+                    channel.setDescription(description);
+                    // Register the channel with the system; you can't change the importance
+                    // or other notification behaviors after this
+                    NotificationManager notificationManager = getSystemService(NotificationManager.class);
+                    notificationManager.createNotificationChannel(channel);
+                }
+
+                NotificationCompat.Builder notif = new NotificationCompat.Builder(this,"1")
+                        .setSmallIcon(R.drawable.logo_parkir_assistant)
+                        .setContentTitle("Notifikasi Check In")
+                        .setContentText(message)
+                        .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+                        .setAutoCancel(true);
+
+                NotificationManagerCompat notificationManager = NotificationManagerCompat.from(this);
+
+            // notificationId is a unique int for each notification that you must define
+                notificationManager.notify(notifId, notif.build());
+
+                BroadcastReceiver br = new BroadcastReceiver() {
+                    @Override
+                    public void onReceive(Context context, Intent intent) {
+                        if (intent.getExtras() != null) {
+                            CountDownTimer cdt = (CountDownTimer) intent.getSerializableExtra("cdtimer");
+                            assert cdt != null;
+                            cdt.cancel();
+                        }
+                    }
+                };
+
+                startActivity(getIntent());
+
+            }
+            shared.removeSpecificSP(SharedPrefManager.SP_ID_ENTRY);
+
         } else {
             scrollView.setVisibility(View.GONE);
             linearLayout.setVisibility(View.VISIBLE);
@@ -182,6 +239,46 @@ public class ProfileActivity extends AppCompatActivity {
         getRiwayatTransaksi();
 
 
+    }
+
+    private void getNotification(){
+        if(checkNetworkConnection()){
+            AndroidNetworking.post(DBContract.SERVER_CEK_ENTRY_PELANGGAN_URL)
+                    .addHeaders("Content-Type", "application/json")
+                    .addBodyParameter("huruf_acak", shared.getSPHurufAcak())
+                    .setPriority(Priority.HIGH)
+                    .setTag("Test Input Entry")
+                    .build()
+                    .getAsJSONObject(new JSONObjectRequestListener() {
+                        @Override
+                        public void onResponse(JSONObject response) {
+                            try {
+                                boolean status = response.getBoolean("status");
+                                message = response.getString("message");
+                                int idEntry = 0;
+                                if(status){
+                                    JSONArray jsonArray = response.getJSONArray("data");
+                                    for(int i =0;i<jsonArray.length();i++){
+                                        JSONObject data = jsonArray.getJSONObject(i);
+
+                                        idEntry = data.getInt("id_entry");
+                                    }
+                                    shared.saveSPInt(SharedPrefManager.SP_ID_ENTRY,idEntry);
+                                }
+
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+                        }
+
+                        @Override
+                        public void onError(ANError anError) {
+
+                        }
+                    });
+        } else {
+            Toast.makeText(getApplicationContext(), "Tidak ada koneksi internet", Toast.LENGTH_SHORT).show();
+        }
     }
 
     private void getRiwayatTransaksi() {

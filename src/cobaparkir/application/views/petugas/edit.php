@@ -57,12 +57,12 @@
                         value="<?= $petugas['alamat'];?>">
                     </div>
                     <div class="form-group">
-                        <label for="nomor_telepon">No. Telepon</label>
+                        <label for="no_telepon">No. Telepon</label>
                         <input type="int"
                             class="form-control"
-                            id="nomor_telepon"
-                            name="nomor_telepon"
-                        value="<?= $petugas['nomor_telepon'];?>">
+                            id="no_telepon"
+                            name="no_telepon"
+                        value="<?= $petugas['no_telepon'];?>">
                     </div>
                     <button type="submit" name="submit" class="btn btn-primary float-right" > Edit </button>
                     </form>

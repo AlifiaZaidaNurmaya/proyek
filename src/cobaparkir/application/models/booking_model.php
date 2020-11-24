@@ -22,12 +22,7 @@ class booking_model extends CI_Model {
         $this->db->insert('booking', $data);
     }
 
-    public function inputBookingData(){
-        $data = [
-            "id_pelanggan" => $this->input->post('id_pelanggan', true),
-            "id_parkir" => $this->input->post('id_parkir', true),
-            "jam_booking" => $this->input->post('jam_booking', true)
-        ];
+    public function inputBookingData($data){
         $this->db->insert('booking', $data);
         return $this->db->affected_rows();
         
@@ -37,6 +32,13 @@ class booking_model extends CI_Model {
     {
         $this->db->where('id_booking', $id);
         $this->db->delete('booking');
+    }
+    
+    public function deleteBookingByIDPelanggan($id_pelanggan)
+    {
+        $this->db->where('id_pelanggan', $id_pelanggan);
+        $this->db->delete('booking');
+        return $this->db->affected_rows();
     }
 
     public function getBookingByID($id)
@@ -49,16 +51,36 @@ class booking_model extends CI_Model {
         
         return $this->db->get()->row_array();
     }
+    // public function getBookingByIDJoinPelanggan($id)
+    // {
+    //     $this->db->select('*');
+    //     $this->db->from('booking b');
+    //     $this->db->join('pelanggan p', 'b.id_pelanggan = p.id_pelanggan');
+    //     $this->db->where('b.id_pelanggan', $id);
+        
+    //     return $this->db->get()->row_array();
+    // }
+
+    public function getBookingByIDPelangganAndroid($id)
+    {
+        $this->db->select('id_booking,b.id_pelanggan,b.id_parkir as idParkir,nama,nomor_plat,no_identitas,jam_booking,b.id_parkir as idparkir,no_parkir,is_booked');
+        $this->db->from('booking b');
+        $this->db->join('pelanggan p', 'b.id_pelanggan = p.id_pelanggan');
+        $this->db->join('tempat_parkir tp', 'b.id_parkir = tp.id_parkir');
+        $this->db->where('b.id_pelanggan', $id);
+        
+        return $this->db->get()->result_array();
+    }
     
     public function getBookingByHurufAcak($hurufAcak)
     {
-        $this->db->select('id_booking,b.id_pelanggan,nama,nomor_plat,no_identitas,jam_booking,b.id_parkir,no_parkir');
+        $this->db->select('id_booking,b.id_pelanggan,nama,nomor_plat,no_identitas,jam_booking,b.id_parkir as idparkir,no_parkir,is_booked');
         $this->db->from('booking b');
         $this->db->join('pelanggan p', 'b.id_pelanggan = p.id_pelanggan');
         $this->db->join('tempat_parkir tp', 'b.id_parkir = tp.id_parkir');
         $this->db->where('p.huruf_acak', $hurufAcak);
         
-        return $this->db->get()->row_array();
+        return $this->db->get()->result_array();
     }
 
     public function editDataBooking()

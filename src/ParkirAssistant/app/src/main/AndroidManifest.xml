@@ -34,7 +34,7 @@
         <activity android:name=".SignUpActivity" />
         <activity android:name=".EWalletActivity" />
         <activity android:name=".BookingActivity" />
-        <activity android:name=".ScanActivity"/>
+        <activity android:name=".ScanActivity" android:label="Server"/>
         <activity android:name=".EditProfile" />
     </application>
 

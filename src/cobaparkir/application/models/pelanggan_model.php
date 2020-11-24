@@ -39,6 +39,13 @@ class pelanggan_model extends CI_Model {
     {
         return $this->db->get_where('pelanggan', ['id_pelanggan' => $id])->row_array();
     }
+    public function getPelangganIDByHurufAcak($huruf)
+    {
+        $this->db->select('id_pelanggan');
+        $this->db->where('huruf_acak', $huruf);
+        $this->db->from('pelanggan');
+        return $this->db->get()->result_array();
+    }
 
     public function editDataPelanggan()
     {

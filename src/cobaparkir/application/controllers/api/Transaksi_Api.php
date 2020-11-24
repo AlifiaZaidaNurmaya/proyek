@@ -28,6 +28,10 @@ class Transaksi_Api extends RestController {
         }
     }
 
+    public function inputtransaksi_post(){
+
+    }
+
 }
 
 /* End of file Transaksi_Api.php */

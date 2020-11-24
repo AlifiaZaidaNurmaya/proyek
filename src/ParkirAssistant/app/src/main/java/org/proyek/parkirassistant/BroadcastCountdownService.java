@@ -10,6 +10,8 @@ import android.util.Log;
 import org.proyek.parkirassistant.BookingActivity;
 import org.proyek.parkirassistant.SharedPrefManager;
 
+import java.io.Serializable;
+
 import androidx.annotation.Nullable;
 
 public class BroadcastCountdownService extends Service {
@@ -38,17 +40,18 @@ public class BroadcastCountdownService extends Service {
             public void onTick(long millIsUntilFinished) {
                 Log.i(TAG, "Countdown seconds remaining: " + millIsUntilFinished/ 1000);
                 bi.putExtra("countdown",millIsUntilFinished);
+                bi.putExtra("timeup",true);
                 sendBroadcast(bi);
 
             }
 
             @Override
             public void onFinish() {
+                bi.putExtra("timeup",false);
+                sendBroadcast(bi);
                 Log.i(TAG, "Timer finished");
             }
         };
-
-        cdt.start();
     }
 
     @Override

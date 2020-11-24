@@ -45,7 +45,7 @@ public class CustomViewFinderView extends ViewFinderView {
         if (center >= getFramingRect().top - mBorderLineLength - 10 && !goingup) goingup = true;
         if (center > -getFramingRect().top + mBorderLineLength + 10 && goingup) {
             canvas.drawRect(Float.intBitsToFloat((getFramingRect().left + 2)),
-                    (float)(middle - 1), (getFramingRect().right - 1), (float)(middle + 2), mLaserPaint);
+                    (float)(middle - 1), (float)(getFramingRect().right - 1), (float)(middle + 2), mLaserPaint);
             center -= 4;
         }
         if (center <= -getFramingRect().top + mBorderLineLength + 10 && goingup) goingup = false;
